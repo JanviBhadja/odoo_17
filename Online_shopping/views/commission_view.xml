@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <record id="view_commission_form" model="ir.ui.view">
+            <field name="name">commission.form</field>
+            <field name="model">commission</field>
+            <field name="arch" type="xml">
+                <form string="Commission">
+                    <sheet>
+                        <group>
+                            <field name="sales_person_id"/>
+                            <field name="start_date" />
+                            <field name="end_date"/>
+                        </group>
+                        <button name="compute_commission_totals" string="Calculate Commission" type="object" class="oe_highlight"/>
+                        <notebook>
+                            <page string="Sale Orders">
+                                <field name="sale_order_ids" />
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="total_commission"/>
+                            <field name="total_amount" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commission_inherited_id" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="banner_route">/onboarding/sale_quotation</attribute>
+                </xpath>
+                <xpath expr="//tree" position="inside">
+                <field name="commission" optional="show"/>
+            </xpath>
+            </field>
+        </record>
+
+        <record id="page_view_inherited" model="ir.ui.view">
+            <field name="name">page.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Commission">
+                        <group>
+                            <field name="commission_amount_on" />
+                            <field name="percentage" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_commissions" model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">commission</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    </data>
+</odoo>

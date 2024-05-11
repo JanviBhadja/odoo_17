@@ -1,0 +1,78 @@
+<odoo>
+    <!-- main menu -->
+    <menuitem id="menu_root" 
+            name="Online Shopping"/>
+
+    <!-- order menu -->
+    <menuitem id="menu_order_folder" 
+            name="Order" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_order_form" 
+            name="Order" 
+            parent="menu_order_folder" 
+            action="action_order_form"/>
+
+    <!-- product menu -->
+    <menuitem id="menu_product_folder" 
+            name="Product" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_product_form" 
+            name="Product" 
+            parent="menu_product_folder" 
+            action="action_product_form"/>
+
+    <!-- order item menu -->
+    <menuitem id="menu_order_item_folder" 
+            name="Order Item" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_order_item_form" 
+            name="Order Item" 
+            parent="menu_order_item_folder" 
+            action="action_order_item_form"/>
+
+    <!-- category menu -->
+    <menuitem id="menu_category_folder" 
+            name="Product Category" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_category_form" 
+            name="Product Category" 
+            parent="menu_category_folder" 
+            action="action_category_form"/>
+
+    <!-- customer menu -->
+    <menuitem id="menu_customer_folder" 
+            name="Customer" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_customer_form" 
+            name="Customer" 
+            parent="menu_customer_folder" 
+            action="action_customer_form"/>
+
+    <!-- product delivery menu -->
+    <menuitem id="menu_product_delivery_folder" 
+            name="Product Delivery" 
+            parent="menu_root"/>
+
+    <menuitem id="menu_product_delivery_form" 
+            name="Product Delivery" 
+            parent="menu_product_delivery_folder" 
+            action="action_product_delivery_form"/>
+
+
+    <!-- sale module custom menu -->
+        <menuitem id="menu_sale_commission"
+                name="Commission"
+                parent="sale.sale_menu_root"/>
+
+        <menuitem id="commission_menu"
+                name="Commission"
+                parent="menu_sale_commission"
+                action="action_commissions"/>
+
+
+</odoo>
