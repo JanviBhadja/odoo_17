@@ -79,6 +79,11 @@
             <field name="res_model">my.product.product</field>
             <field name="view_mode">tree,form,kanban</field>
         </record>
+
+        <menuitem id="menu_product_form" 
+            name="Product" 
+            parent="menu_product_folder" 
+            action="action_product_form"/>
         
     </data>
 </odoo>

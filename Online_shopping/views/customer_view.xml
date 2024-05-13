@@ -43,6 +43,11 @@
             <field name="res_model">my.customer.customer</field>
             <field name="view_mode">tree,form</field>
         </record>
-        
+
+        <menuitem id="menu_customer_form" 
+            name="Customer" 
+            parent="menu_customer_folder" 
+            action="action_customer_form"/>
+            
     </data>
 </odoo>

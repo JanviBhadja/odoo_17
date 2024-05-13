@@ -34,5 +34,10 @@
             <field name="view_mode">tree,form</field>
         </record>
         
+        <menuitem id="menu_category_form" 
+            name="Product Category" 
+            parent="menu_category_folder" 
+            action="action_category_form"/>
+            
     </data>
 </odoo>

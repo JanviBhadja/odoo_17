@@ -71,5 +71,10 @@
             <field name="view_mode">tree,form</field> 
         </record>
         
+        <menuitem id="menu_product_delivery_form" 
+            name="Product Delivery" 
+            parent="menu_product_delivery_folder" 
+            action="action_product_delivery_form"/>
+            
     </data>
 </odoo>

@@ -102,5 +102,10 @@
             <field name="view_mode">tree,form</field>
         </record>
         
+        <menuitem id="menu_order_item_form" 
+            name="Order Item" 
+            parent="menu_order_item_folder" 
+            action="action_order_item_form"/>
+            
     </data>
 </odoo>

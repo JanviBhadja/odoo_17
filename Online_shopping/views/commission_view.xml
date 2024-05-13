@@ -62,5 +62,10 @@
             <field name="view_mode">form</field>
         </record>
 
+        <menuitem id="commission_menu"
+                name="Commission"
+                parent="menu_sale_commission"
+                action="action_commissions"/>
+                
     </data>
 </odoo>

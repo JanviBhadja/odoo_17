@@ -72,8 +72,8 @@ class SaleOrder(models.Model):
     @api.depends("amount_total", "partner_id.commission_amount_on", "partner_id.percentage")
     def compute_commision_amount(self):
         for order in self:
-            if order.amount_total > order.partner_id.commission_amount_on:
-                order.commission = (order.amount_total * order.partner_id.percentage) / 100
+            if order.amount_total > order.user_id.partner_id.commission_amount_on:
+                order.commission = (order.amount_total * order.user_id.partner_id.percentage) / 100
             else:
                 order.commission = 0.0
 
