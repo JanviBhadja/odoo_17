@@ -121,14 +121,11 @@ class SaleOrder(models.Model):
         }
 
     @api.model
-
     def _get_order_lines_to_report(self):
         order_lines_context = self.env.context.get('order_lines')
         if order_lines_context:
             return self.order_line.filtered(lambda l: l.id in order_lines_context)
         return super(SaleOrder, self)._get_order_lines_to_report()
-
-
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -148,3 +145,5 @@ class StockPicking(models.Model):
 #             raise UserError(_('Error: Available quantity is zero!'))
 
 #         return available_quantity
+
+    

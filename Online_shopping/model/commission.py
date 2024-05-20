@@ -1,33 +1,3 @@
-# from odoo import models, fields, api
-
-# class Commission(models.Model):
-#     _name = 'commission'
-#     _description = 'Custom Commission Model'
-
-#     sales_person_id = fields.Many2one('res.users', string='Sales Person')
-#     sale_order_ids = fields.Many2many('sale.order', string='Sale Orders')
-
-#     total_commission = fields.Float(string='Total Commission', compute='_compute_total_commission')
-
-#     @api.onchange('sales_person_id')
-#     def _onchange_sales_person_id(self):
-#         if self.sales_person_id:
-#             sale_orders = self.env['sale.order'].search([('user_id', '=', self.sales_person_id.id)])
-#             self.sale_order_ids = [(6, 0, sale_orders.ids)]
-
-#     @api.depends('sale_order_ids')
-#     def _compute_total_commission(self):
-#         for commission in self:
-#             total = sum(commission.sale_order_ids.mapped('amount_total'))
-#             commission.total_commission = total
-
-#     @api.depends('sale_order_ids')
-#     def _compute_total_commission(self):
-#         for commission in self:
-#             total = sum(commission.sale_order_ids.mapped('amount_total'))
-#             # Calculate 5% commission on total sales
-#             commission.total_commission = total * 0.05
-
 from odoo import models, fields, api
 
 class Commission(models.Model):
@@ -88,6 +58,28 @@ class ResPartner(models.Model):
     commission_amount_on = fields.Float(string='Commission Amount On')
     percentage = fields.Float(string="Percentage")
 
+    def action_send_email(self):
+        self.ensure_one()
+        mail_template = self.env.ref('Online_shopping.mail_res_partner_template_blog')
+        ctx = {
+            'default_model': 'res.partner',
+            'default_res_ids': self.ids,
+            'default_template_id': mail_template.id if mail_template else None,
+            'default_composition_mode': 'comment',
+            'mark_so_as_sent': True,
+            'default_email_layout_xmlid': 'mail.mail_notification_layout_with_responsible_signature',
+            'proforma': self.env.context.get('proforma', False),
+            'force_email': True,
 
+        }
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': ctx,
+        }
 
 

@@ -9,6 +9,7 @@
     'depends' : ['base' , 'stock', 'sale' , 'sale_management', 'sale_stock'],
     'data':[
         "security/ir.model.access.csv",
+        "security/shopping_groups.xml",
 
         "wizard/cancel_order_wizard_view.xml",
         "wizard/sale_order_view.xml",
@@ -21,6 +22,9 @@
         "report/order_delivery_report.xml",
         "report/commission_report.xml",
         "report/commission_report_view.xml",
+        "report/res_partner_email_template_report.xml",
+
+        "data/res_partner_template.xml",
 
         "views/menu_view.xml",
         "views/product_view.xml",

@@ -8,12 +8,12 @@ class CancelOrderWizard(models.TransientModel):
     password = fields.Char(string='Password')
 
     def cancel_order(self):
-        expected_password = "janvi"  # Replace with your actual password
+        expected_password = "janvi"  
         if self.password == expected_password:
             active_ids = self.env.context.get('active_ids')
             orders = self.env['product.order'].browse(active_ids)
-            orders.action_cancel()  # Call action_cancel to cancel the orders
-            orders.write({'state': 'cancel'})  # Set the state of the orders to 'cancel'
+            orders.action_cancel()  
+            orders.write({'state': 'cancel'})
             return {'type': 'ir.actions.act_window_close'}
         else:
             raise UserError('Incorrect password! Please try again.')

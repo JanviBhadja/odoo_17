@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="shopping_groups_manager" model="res.groups">
+        <field name="name">Shopping Access</field>
+        <field name="category_id" ref="base.group_erp_manager"/>
+    </record>
+</odoo>
