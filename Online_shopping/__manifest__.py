@@ -13,6 +13,7 @@
 
         "wizard/cancel_order_wizard_view.xml",
         "wizard/sale_order_view.xml",
+        "wizard/excel_report_wizard_view.xml",
 
         "report/order_report.xml",
         "report/order_report_templates.xml",

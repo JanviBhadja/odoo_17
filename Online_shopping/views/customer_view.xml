@@ -2,8 +2,8 @@
 <odoo>
     <data>
 
-        <record id="view_customer_form" model="ir.ui.view">
-            <field name="name">Customer Form</field>
+        <record id="customer_form_view" model="ir.ui.view">
+            <field name="name">customer.form.view</field>
             <field name="model">my.customer.customer</field>
             <field name="arch" type="xml">
                 <form string="Customer Form">
@@ -25,8 +25,8 @@
             </field>
         </record>
         
-        <record id="view_customer_tree" model="ir.ui.view">
-            <field name="name">Customer Tree</field>
+        <record id="customer_tree_view" model="ir.ui.view">
+            <field name="name">customer.tree.view</field>
             <field name="model">my.customer.customer</field>
             <field name="arch" type="xml">
                 <tree string="Customer Tree">
@@ -38,16 +38,17 @@
             </field>
         </record>
 
-        <record id="action_customer_form" model="ir.actions.act_window">
+        <record id="action_customer" model="ir.actions.act_window">
             <field name="name">Customer</field>
             <field name="res_model">my.customer.customer</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="menu_customer_form" 
-            name="Customer" 
-            parent="menu_customer_folder" 
-            action="action_customer_form"/>
-            
+        <menuitem 
+                id="menu_customer_form" 
+                name="Customer" 
+                parent="customer_menu" 
+                action="action_customer"/>
+                
     </data>
 </odoo>

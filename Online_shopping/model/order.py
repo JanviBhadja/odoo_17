@@ -8,7 +8,6 @@ class Order(models.Model):
 
     order_date = fields.Datetime(string='Order Date')
     customer_id = fields.Many2one('my.customer.customer', string='Customer')
-    # customer_name = fields.Char(string='Customer Name', related='customer_id.name', store=True)
     customer_email = fields.Char(string='Customer Email', related='customer_id.email', store=True)
     customer_address = fields.Text(string='Customer Address', related='customer_id.address', store=True)
     order_item_ids = fields.One2many('order.item', 'order_id', string='Order Items')
@@ -16,12 +15,6 @@ class Order(models.Model):
     orderId = fields.Char(string='Order Id', readonly=True, default='New')
     state = fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed'), ('done', 'Done'), ('cancel','Cancel')], string='Status', default='draft')
     delivery_id = fields.Many2one('product.delivery.me' , string = 'Delivery ID' , readonly=True)
-    # product_delivery_date = fields.Date(string="Expected delivery date", related='delivery_id.delivery_date', store= True)
-    # order_item_count = fields.Integer(string='Order Item Count', compute='_compute_order_item_count')
-    # order_item_product_ids = fields.Many2many('product.product', compute='_compute_order_item_details')
-    # order_item_quantities = fields.One2many('order.item', compute='_compute_order_item_details')
-    # order_item_prices_unit = fields.One2many('order.item', compute='_compute_order_item_details')
-    # order_item_subtotals = fields.One2many('order.item', compute='_compute_order_item_details')
     payment_method = fields.Selection([
         ('debit_card', 'Debit Card'),
         ('credit_card', 'Credit Card'),
@@ -120,6 +113,11 @@ class Order(models.Model):
                     'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , # Set payment status
                     'state' : 'ordered'
                 })
+            # query = """ALTER TABLE product_category_me DROP COLUMN create_uid"""
+            query = """SELECT id FROM product_order"""
+            self.env.cr.execute(query)
+            order1 = self.env.cr.fetchall()
+            print("order1------>", order1)
         return res
 
     def cancel_order(self):

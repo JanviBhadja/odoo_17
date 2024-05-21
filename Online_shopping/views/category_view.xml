@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-
         <!-- Form View -->
-        <record id="view_product_category_form" model="ir.ui.view">
-            <field name="name">product.category.me.form</field>
+        <record id="product_category_form_view" model="ir.ui.view">
+            <field name="name">product.category.form.view</field>
             <field name="model">product.category.me</field>
             <field name="arch" type="xml">
                 <form string="Category Form">
@@ -18,8 +17,8 @@
         </record>
 
         <!-- Tree View -->
-        <record id="view_product_category_tree" model="ir.ui.view">
-            <field name="name">product.category.me.tree</field>
+        <record id="product_category_tree_view" model="ir.ui.view">
+            <field name="name">product.category.tree.view</field>
             <field name="model">product.category.me</field>
             <field name="arch" type="xml">
                 <tree string="Categories">
@@ -28,16 +27,16 @@
             </field>
         </record>
 
-        <record id="action_category_form" model="ir.actions.act_window">
+        <record id="action_category" model="ir.actions.act_window">
             <field name="name">Category</field>
             <field name="res_model">product.category.me</field>
             <field name="view_mode">tree,form</field>
-        </record>
-        
-        <menuitem id="menu_category_form" 
-            name="Product Category" 
-            parent="menu_category_folder" 
-            action="action_category_form"/>
-            
+        </record>  
+
+        <menuitem 
+                id="menu_category_form" 
+                name="Product Category" 
+                parent="category_menu" 
+                action="action_category"/>  
     </data>
 </odoo>

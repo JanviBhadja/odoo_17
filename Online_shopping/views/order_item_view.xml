@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_order_item_form" model="ir.ui.view">
-            <field name="name">Order Item Form</field>
+        <record id="order_item_form_view" model="ir.ui.view">
+            <field name="name">order.item.form.view</field>
             <field name="model">order.item</field>
             <field name="arch" type="xml">
                 <form string="Order Item Form">
@@ -19,8 +19,8 @@
             </field>
         </record>
 
-        <record id="view_order_item_tree" model="ir.ui.view">
-            <field name="name">Order Item Tree</field>
+        <record id="order_item_tree_view" model="ir.ui.view">
+            <field name="name">order.item.tree.view</field>
             <field name="model">order.item</field>
             <field name="arch" type="xml">
                 <tree string="Order Item Tree">
@@ -112,16 +112,17 @@
         </record>
 
 
-        <record id="action_order_item_form" model="ir.actions.act_window">
+        <record id="action_order_item" model="ir.actions.act_window">
             <field name="name">Order Item</field>
             <field name="res_model">order.item</field>
             <field name="view_mode">tree,form</field>
         </record>
-        
-        <menuitem id="menu_order_item_form" 
-            name="Order Item" 
-            parent="menu_order_item_folder" 
-            action="action_order_item_form"/>
+
+        <menuitem 
+                id="menu_order_item_form" 
+                name="Order Item" 
+                parent="order_item_menu" 
+                action="action_order_item"/>
             
     </data>
 </odoo>
