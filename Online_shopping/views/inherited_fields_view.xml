@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="stock_order_picking_form_view" model="ir.ui.view">
+            <field name="name">stock.order.picking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']"
+                       position="after">
+                    <field name="extra_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="facilities_sale_order_form_view" model="ir.ui.view">
+            <field name="name">event.facilities.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='tax_id']" position="after">
+                    <field name="extra_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_form_inherit_my" model="ir.ui.view">
+            <field name="name">sale.order.form.my</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_code']" position="before">
+                    <field name="checking_date"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="nick_name" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_ebay_tree_view_my" model="ir.ui.view">
+            <field name="name">product.template.ebay.tree.my</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='picking_type_id']" position="before">
+                <field name="nick_name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/header" position="inside">
+                        <button name="action_generate_sale_report" string="Generate Sale Report" type="object" class="btn-primary"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="email_customer_view_my" model="ir.ui.view">
+            <field name="name">product.template.ebay.tree.my</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <group>
+                        <field name="customer_rank" invisible="1"/>
+                    </group>
+                    <header>
+                        <!-- The button will be visible only if 'customer_rank' is greater than 0 (indicating a customer) -->
+                        <button string="Send Mail" name="action_send_email" type="object" class="oe_highlight" invisible="customer_rank == 0"/>
+                    </header>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="commission_inherited_id" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="banner_route">/onboarding/sale_quotation</attribute>
+                </xpath>
+                <xpath expr="//tree" position="inside">
+                <field name="commission" optional="show"/>
+            </xpath>
+            </field>
+        </record>
+
+        <record id="page_view_inherited" model="ir.ui.view">
+            <field name="name">page.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Commission">
+                        <group>
+                            <field name="commission_amount_on" />
+                            <field name="percentage" />
+                            <field name="dob" />
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

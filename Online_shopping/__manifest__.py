@@ -26,6 +26,7 @@
         "report/res_partner_email_template_report.xml",
 
         "data/res_partner_template.xml",
+        "data/bday_reminder_cron.xml",
 
         "views/menu_view.xml",
         "views/product_view.xml",
@@ -35,7 +36,8 @@
         "views/order_item_view.xml",
         "views/product_delivery_view.xml",
         "views/commission_view.xml",
-        "views/commission_on_line_view.xml"
+        "views/commission_on_line_view.xml",
+        "views/inherited_fields_view.xml"
 
     ],  
     'installable': True,

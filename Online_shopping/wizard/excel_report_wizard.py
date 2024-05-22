@@ -133,7 +133,7 @@ class CommissionWizard(models.TransientModel):
             'text_wrap': True, 'align': 'left', 'valign': 'top', 'border': True
         })
         number_format = workbook.add_format({
-            'num_format': '0.00', 'text_wrap': True, 'align': 'left', 'valign': 'top', 'border': True
+            'num_format': '0.00', 'text_wrap': True, 'align': 'right', 'valign': 'top', 'border': True
         })
         total_format = workbook.add_format({
             'bold': True, 'bg_color': '#FFEB3B', 'border': True  # Yellow background for totals
@@ -213,6 +213,57 @@ class CommissionWizard(models.TransientModel):
         #     sheet1.write(row, 4, f"{currency_symbol}{amount_to_invoice or 'NA'}", number_format)
         #     row+=1
             
+        sheet2 = workbook.add_worksheet('Product Report')
+
+        sheet2.set_column('A:A',20)
+        sheet2.set_column('B:G',15)
+        sheet2.set_default_row(20)
+        sheet2.set_row(0, 30)
+
+        report_header2 = f"Product report from {self.start_date.strftime('%d-%m-%Y')} to {self.end_date.strftime('%d-%m-%Y')}"
+        sheet2.merge_range('A1:G1', report_header2, header_format)
+        sheet2.set_row(0, 25)  # Set row height for the header
+        sheet2.set_row(1, 30)
+
+        # Write headers with bold format
+        headers = [
+            'Product Name','Order Id', 'Customer name', 'Current Price', 'Quantity', 'selling price','Total price'
+        ]
+        for i, header in enumerate(headers):
+            sheet2.write(1, i, header, bold_format)
+
+        query_fet = (
+            "SELECT pt.name AS product_name, so.name AS order_name, rp.name AS partner_name, "
+            "pt.list_price AS current_price, "
+            "SUM(sol.product_uom_qty) AS total_quantity, "
+            "SUM(sol.price_unit) AS unit_price, "
+            "SUM(sol.price_total) AS total_price "
+            "FROM sale_order so "
+            "JOIN res_partner rp ON so.partner_id = rp.id "
+            "JOIN sale_order_line sol ON so.id = sol.order_id "
+            "JOIN product_product pp ON sol.product_id = pp.id "
+            "JOIN product_template pt ON pp.product_tmpl_id = pt.id "
+            "WHERE so.date_order BETWEEN %s AND %s "
+            "GROUP BY pt.name, so.name, rp.name, so.partner_id, pt.list_price"
+        )
+        params = (self.start_date.strftime('%Y-%m-%d'), self.end_date.strftime('%Y-%m-%d'))
+        self.env.cr.execute(query_fet, params)
+        result_data = self.env.cr.fetchall()
+
+        # print(result_data)  # Debugging line to check the data
+
+        row = 2  # Start from the third row
+        for i in result_data:
+            sheet2.write(row, 0, f"{i[0]['en_US'] or 'NA'}", normal_format)
+            sheet2.write(row, 1, f"{i[1] or 'NA'}", normal_format)
+            sheet2.write(row, 2, f"{i[2] or 'NA'}", normal_format)
+            sheet2.write(row, 3, f"{currency_symbol}{i[3] or 'NA'}", normal_format)
+            sheet2.write(row, 4, f"{i[4] or 'NA'}", number_format)
+            sheet2.write(row, 5, f"{currency_symbol}{i[5] or 'NA'}", normal_format)
+            sheet2.write(row, 6, f"{currency_symbol}{i[6] or 'NA'}", normal_format)
+            row += 1
+
+
         workbook.close()
         output.seek(0)
 

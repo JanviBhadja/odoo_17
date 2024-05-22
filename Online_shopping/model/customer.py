@@ -13,6 +13,7 @@ class Customer(models.Model):
     customerID = fields.Char(string='Customer Id', readonly=True, copy=False)
     order_count = fields.Integer(string='Order Count', compute='_compute_order_count')
     order_ids = fields.One2many('product.order', 'customer_id', string='Orders')
+    dob = fields.Date(string='Date of Birth')
 
     @api.depends('order_ids')
     def _compute_order_count(self):
@@ -56,3 +57,24 @@ class Customer(models.Model):
             'target':'new',
             'domain': [('customer_id', '=', self.id)]
         }
+
+    @api.model
+    def bday_notification(self):
+        # for rec in self:
+        # print("ASDE")
+        try:
+            records = self.search([('dob','=',fields.Date.today())])
+
+            for rec in records:
+                            email_values = {
+                                'email_to': rec.email,
+                                'subject': "Happy Birthday",
+                                # 'body_html': "<div><p>Wishing you a very happy birthday!</p></div>"
+                                }
+            print(email_values)
+            mail_template = self.env.ref('Online_shopping.renew_bday_template')
+            mail_template.with_context({}).send_mail(rec.id, email_values=email_values, force_send=True)
+            print("Successfully Send a Email For Bday wishes")
+            
+        except Exception as e:
+            print(e)

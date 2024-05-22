@@ -57,6 +57,7 @@ class ResPartner(models.Model):
 
     commission_amount_on = fields.Float(string='Commission Amount On')
     percentage = fields.Float(string="Percentage")
+    dob = fields.Date(string='Date of Birth')
 
     def action_send_email(self):
         self.ensure_one()
@@ -82,4 +83,23 @@ class ResPartner(models.Model):
             'context': ctx,
         }
 
+    # @api.model
+    # def bday_notification(self):
+    #     # for rec in self:
+    #     # print("ASDE")
+    #     try:
+    #         records = self.env['res.partner'].search([('dob','=',fields.Date.today())])
 
+    #         for rec in records:
+    #                         email_values = {
+    #                             'email_to': rec
+    #                             .email,
+    #                             'subject': "Happy Birthday",
+    #                             # 'body_html': "<div><p>Wishing you a very happy birthday!</p></div>"
+    #                             }
+    #         mail_template = self.env.ref('Online_shopping.renew_bday_template')
+    #         mail_template.with_context({}).send_mail(rec.id, email_values=email_values, force_send=True)
+    #         print("Successfully Send a Email For Bday wishes")
+            
+    #     except Exception as e:
+    #         print(e)

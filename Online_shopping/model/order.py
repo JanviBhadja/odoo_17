@@ -1,5 +1,7 @@
-from datetime import timedelta
 from odoo import models, fields, api
+from odoo.exceptions import UserError
+from datetime import timedelta
+import base64
 
 class Order(models.Model):
     _name = 'product.order'
@@ -33,10 +35,8 @@ class Order(models.Model):
             rec.state = 'draft'
 
     def action_confirm(self):
-        # print(self)
         for rec in self:
             rec.state = 'confirmed'
-        # self.write({'state': 'confirmed'})
     
     def action_cancel(self):
         for rec in self:
