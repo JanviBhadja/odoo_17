@@ -129,22 +129,32 @@ class Order(models.Model):
             'target': 'new',
         }
 
-class OrderConfirmationButton(models.Model):
-    _inherit = 'product.order'
+    # def confirm_order_with_email(self):
+    #     self.action_confirm()
+        
+    #     template = self.env.ref('Online_shopping.email_template_order_confirmation')
+    #     template_values = {
+    #         'name': self.customer_id, 
+    #     }
+        
+    #     if 'order_id' in template_values:
+    #         del template_values['order_id']
 
-    def confirm_order(self):
-        self.action_confirm()
-        return True
+    #     body_html = template._render_template(template.body_html, **template_values)
+        
+    #     mail_values = {
+    #         'subject': template.subject,
+    #         'body_html': body_html,
+    #         'email_to': self.customer_email, 
+    #         'email_from': self.env.user.email,
+    #     }
+        
+    #     self.env['mail.mail'].create(mail_values).send()
+    #     print("Order confirmation email sent successfully.")
+        
+    #     return True
+
+
+
+
     
-    def cancel_order(self):
-        self.action_cancel()
-        return True
-
-    def cancel_order_wizard(self):
-        return {
-            'name': 'Cancel Order',
-            'type': 'ir.actions.act_window',
-            'res_model': 'cancel.order.wizard',
-            'view_mode': 'form',
-            'target': 'new',
-        }

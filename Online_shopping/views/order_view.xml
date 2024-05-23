@@ -111,6 +111,21 @@
             </field>
         </record>
 
+        <!-- <record id="email_template_order_confirmation" model="mail.template">
+            <field name="name">Order Confirmation</field>
+            <field name="model_id" ref="model_product_order"/>
+            <field name="subject">Order Confirmation - ${object.order_id}</field>
+            <field name="email_from">${object.env.user.email}</field>
+            <field name="email_to">${object.customer_email}</field>
+            <field name="lang">${object.env.user.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Dear ${object.customer_id.name},</p>
+                <p>Your order with ID ${object.order_id} has been confirmed.</p>
+                <p>Thank you for shopping with us.</p>
+            ]]></field>
+        </record> -->
+
+
         <record id="action_order_form" model="ir.actions.act_window">
             <field name="name">Order</field>
             <field name="res_model">product.order</field>

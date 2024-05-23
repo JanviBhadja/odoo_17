@@ -24,5 +24,23 @@
                 </div>
             </field>
         </record>
+        
+        <record id="email_template_sale_report" model="mail.template">
+            <field name="name">Sale Report Email Template</field>
+            <field name="model_id" ref="model_commission_sale_wizard"/> 
+            <field name="subject">Sales Report for ${object.start_date} to ${object.end_date}</field>
+            <field name="email_from">${(object.env.user.email or 'noreply@example.com')}</field>
+            <field name="email_to">${object.env.user.email}</field>
+            <field name="lang">${object.env.user.lang}</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html" type="xml">
+                <div>
+                    <p>Hello,</p>
+                    <p>Please find attached the sales report for the period from ${object.start_date} to ${object.end_date}.</p>
+                    <p>Thank you.</p>
+                </div>
+            </field>
+            <!-- <field name="attachment_ids" eval="[(4, attachment_id)]"/> -->
+        </record>
     </data>
 </odoo>

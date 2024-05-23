@@ -106,6 +106,27 @@ class StockPicking(models.Model):
     )
 
 
+class OrderConfirmationButton(models.Model):
+    _inherit = 'product.order'
+
+    def confirm_order(self):
+        self.action_confirm()
+        return True
+    
+    def cancel_order(self):
+        self.action_cancel()
+        return True
+
+    def cancel_order_wizard(self):
+        return {
+            'name': 'Cancel Order',
+            'type': 'ir.actions.act_window',
+            'res_model': 'cancel.order.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
@@ -157,7 +178,6 @@ class ResPartner(models.Model):
             
     #     except Exception as e:
     #         print(e)
-
 
 #     class CustomStockQuant(models.Model):
 #     _inherit = 'stock.quant'
