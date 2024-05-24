@@ -39,36 +39,6 @@
             </field>
         </record>
 
-        <record id="renew_bday_template" model="mail.template">
-            <field name="name">Bday: Wishes Mail</field>
-            <field name="email_from">{{user.email}}</field>
-            <field name="model_id" ref="Online_shopping.model_my_customer_customer"/>
-            <!-- <field name="model_id" ref="Online_shopping.model_res_partner"/> -->
-            <field name="auto_delete" eval="True"/>
-            <field name="body_html" type="html">
-                <div style="margin: 0px; padding: 0px;">
-                    <div>
-                        <h5>
-                            Hello <t t-out="object.name"/>
-                        </h5>
-                    </div>
-                    <div>
-                        <p>Wishing you a very happy birthday!
-                        <br/><br/>
-                        May you achieve more success in your life.
-                        <br/><br/>
-                        Enjoy your day.
-                        </p> 
-                    </div>
-                    <br/>
-                    Best Wishes,
-                    <br/>
-                    <t t-out="user.name"/>
-                    <br/>
-                </div>
-            </field>
-        </record>
-
         <record id="action_customer" model="ir.actions.act_window">
             <field name="name">Customer</field>
             <field name="res_model">my.customer.customer</field>

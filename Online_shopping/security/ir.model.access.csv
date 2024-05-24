@@ -10,4 +10,3 @@ access_sale_report_wizard,sale.report.wizard_access,model_sale_report_wizard,bas
 access_commission,commission_access,model_commission,base.group_user,1,1,1,1
 access_commission_on_line,commission.on.line_access,model_commission_on_line,base.group_user,1,1,1,1
 access_commission_sale_wizard,commission.sale.wizard_access,model_commission_sale_wizard,base.group_user,1,1,1,1
-access_sale_report_scheduler,sale.report.scheduler_access,model_sale_report_scheduler,base.group_user,1,1,1,1

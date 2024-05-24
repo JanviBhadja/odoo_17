@@ -22,11 +22,11 @@ class SaleReportWizard(models.TransientModel):
 
 
     def report(self):
-        print(" selected order line <", self.sale_order_line_ids)
+        # print(" selected order line <", self.sale_order_line_ids)
         order_line = self.sale_order_line_ids.mapped('id')
-        print(" selected order line", order_line)
+        # print(" selected order line", order_line)
         action = self.env.ref('Online_shopping.report_sale_order_document_my').with_context(my_report = True, order_lines = order_line).report_action(self.order_id)
-        print(action)
+        # print(action)
         return action
 
 

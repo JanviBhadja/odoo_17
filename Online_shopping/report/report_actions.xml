@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="action_filtered_data" model="ir.actions.report">
+            <field name="name">Sale Filtered Report</field>
+            <field name="model">commission</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">Online_shopping.report_filter_data</field>
+            <field name="report_file">Online_shopping.report_filter_data</field>
+            <field name="print_report_name">'Sale Filtered Order - %s' % (object.sales_person_id.name)</field>
+            <field name="binding_model_id" ref="model_commission"/>
+            <field name="binding_type">report</field>
+        </record>
+        
         <record id="action_report_product_order" model="ir.actions.report">
             <field name="name">Product Order</field>
             <field name="model">product.order</field>
@@ -22,6 +33,15 @@
             <field name="print_report_name">'User - %s' % (object.name)</field>
             <field name="binding_model_id" ref="model_res_partner"/>
             <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_sale_order_document_my" model="ir.actions.report">
+            <field name="name">Sale Order Report</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">Online_shopping.report_saleorder_pro_forma_my</field>
+            <field name="report_file">Online_shopping.report_saleorder_pro_forma_my</field>
+            <field name="print_report_name">'Sale Order Report'</field>
         </record>
 
     </data>

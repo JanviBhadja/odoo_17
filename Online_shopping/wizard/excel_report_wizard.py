@@ -10,15 +10,7 @@ class CommissionWizard(models.TransientModel):
     start_date = fields.Date(string='Start Date', required=True)
     end_date = fields.Date(string='End Date', required=True)
 
-    def fetch_from_sale(self):
-        domain = [
-            ('date_order', '>=', self.start_date),
-            ('date_order', '<=', self.end_date),  
-        ]
-        action = self.env['sale.order'].search(domain)
-        return action
-
-    def action_xlsx_report_download(self):
+    def action_xlsx_report_download(self, start_date, end_date):
         output = io.BytesIO()
         workbook = xlsxwriter.Workbook(output)
         sheet = workbook.add_worksheet('Sales Report')
@@ -58,7 +50,7 @@ class CommissionWizard(models.TransientModel):
         sheet.set_row(0, 30)
 
         # Write report header
-        report_header = f"Sales Report from {self.start_date.strftime('%d-%m-%Y')} to {self.end_date.strftime('%d-%m-%Y')}"
+        report_header = f"Sales Report from {start_date} to {end_date}"
         sheet.merge_range('A1:O1', report_header, header_format)
         sheet.set_row(0, 25)  # Set row height for the header
         sheet.set_row(1, 30)
@@ -72,7 +64,13 @@ class CommissionWizard(models.TransientModel):
         for i, header in enumerate(headers):
             sheet.write(1, i, header, bold_format)
 
-        data = self.fetch_from_sale()
+        domain = [
+            ('date_order', '>=', start_date),
+            ('date_order', '<=', end_date),  
+        ]
+        data = self.env['sale.order'].search(domain)
+
+        # data = self.fetch_from_sale()
         row = 2  # Start from the third row
 
         # Initialize column totals
@@ -119,26 +117,7 @@ class CommissionWizard(models.TransientModel):
         sheet.write(row, 14, f"{currency_symbol}{round(column_totals[3],2)}", total_format)
         
         
-        sheet1 = workbook.add_worksheet('Customer Report')
-        
-        bold_format = workbook.add_format({
-            'bold': True, 'align': 'center', 'font_size': 10, 'valign': 'vcenter', 
-            'bg_color': '#FF5733', 'border': True, 'text_wrap': True
-        })
-        header_format = workbook.add_format({
-            'bold': True, 'align': 'center', 'font_size': 12, 'valign': 'vcenter', 
-            'bg_color': '#FFEB3B', 'font_color': '#FFFFFF', 'border': True, 'text_wrap': True
-        })
-        normal_format = workbook.add_format({
-            'text_wrap': True, 'align': 'left', 'valign': 'top', 'border': True
-        })
-        number_format = workbook.add_format({
-            'num_format': '0.00', 'text_wrap': True, 'align': 'right', 'valign': 'top', 'border': True
-        })
-        total_format = workbook.add_format({
-            'bold': True, 'bg_color': '#FFEB3B', 'border': True  # Yellow background for totals
-        })
-        
+        sheet1 = workbook.add_worksheet('Customer Report') 
         
         sheet1.set_column('A:A',20)
         sheet1.set_column('B:E',15)
@@ -176,7 +155,7 @@ class CommissionWizard(models.TransientModel):
             WHERE so.date_order >= %s AND so.date_order <= %s
             GROUP BY so.partner_id
         """
-        self.env.cr.execute(query, (self.start_date, self.end_date))
+        self.env.cr.execute(query, (start_date, end_date))
         results = self.env.cr.fetchall()
 
         row = 2  # Start from the second row for data
@@ -220,7 +199,7 @@ class CommissionWizard(models.TransientModel):
         sheet2.set_default_row(20)
         sheet2.set_row(0, 30)
 
-        report_header2 = f"Product report from {self.start_date.strftime('%d-%m-%Y')} to {self.end_date.strftime('%d-%m-%Y')}"
+        report_header2 = f"Product report from {start_date} to {end_date}"
         sheet2.merge_range('A1:G1', report_header2, header_format)
         sheet2.set_row(0, 25)  # Set row height for the header
         sheet2.set_row(1, 30)
@@ -246,11 +225,11 @@ class CommissionWizard(models.TransientModel):
             "WHERE so.date_order BETWEEN %s AND %s "
             "GROUP BY pt.name, so.name, rp.name, so.partner_id, pt.list_price"
         )
-        params = (self.start_date.strftime('%Y-%m-%d'), self.end_date.strftime('%Y-%m-%d'))
+        params = (start_date, end_date)
         self.env.cr.execute(query_fet, params)
         result_data = self.env.cr.fetchall()
 
-        # print(result_data)  # Debugging line to check the data
+        # print(result_data) 
 
         row = 2  # Start from the third row
         for i in result_data:
@@ -266,6 +245,7 @@ class CommissionWizard(models.TransientModel):
 
         workbook.close()
         output.seek(0)
+        return output.read()
 
         # Encode the file to base64
         excel_file = base64.b64encode(output.read())
@@ -287,4 +267,23 @@ class CommissionWizard(models.TransientModel):
             'target': 'self'
         }
 
-    
+    def fetch_from_sale(self):
+        action =  self.action_xlsx_report_download(self.start_date, self.end_date)
+
+        excel_file = base64.b64encode(action)
+
+        # Create an attachment
+        attachment = self.env['ir.attachment'].create({
+            'name': f'sales_report_from_{self.start_date}_to_{self.end_date}.xlsx',
+            'type': 'binary',
+            'datas': excel_file,
+            'res_model': 'commission.sale.wizard',
+            'res_id': self.id,
+            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        })
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content/{attachment.id}?download=true',
+            'target': 'self'
+        }

@@ -43,7 +43,6 @@
                 id="menu_order_item_form" 
                 name="Order Item" 
                 parent="order_item_menu" 
-                action="action_order_item"/>
-            
+                action="action_order_item"/>      
     </data>
 </odoo>

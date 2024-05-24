@@ -98,6 +98,38 @@ class SaleOrder(models.Model):
             return self.order_line.filtered(lambda l: l.id in order_lines_context)
         return super(SaleOrder, self)._get_order_lines_to_report()
 
+    def generate_and_send_monthly_report(self):
+        # Calculate dates for the previous month
+        today = fields.Date.today()
+        first_day_of_current_month = today.replace(day=1)
+        last_day_of_previous_month = first_day_of_current_month - timedelta(days=1)
+        first_day_of_previous_month = last_day_of_previous_month.replace(day=1)
+
+        start_date = first_day_of_previous_month.strftime('%Y-%m-%d')
+        end_date = last_day_of_previous_month.strftime('%Y-%m-%d')
+        print("start_date>>>>>>>>>>>>end_date",start_date,end_date)
+
+        
+        commission_wizard = self.env['commission.sale.wizard']
+        workbook = commission_wizard.action_xlsx_report_download(start_date, end_date)
+
+        attachment = self.env['ir.attachment'].create({
+            'name': f'sales_report_from_{start_date}_to_{end_date}.xlsx',
+            'type': 'binary',
+            'datas': base64.b64encode(workbook),
+            'res_model': 'sale.report.scheduler',
+            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        })
+
+        # Prepare email values
+        email_values = {
+            'subject': f"Monthly Sales Report ({start_date} to {end_date})",
+            'attachment_ids': [(4, attachment.id)],
+        }
+
+       # Send email
+        mail_template = self.env.ref('Online_shopping.email_template_sale_report')  # Replace 'Your_Module' with your actual module name
+        mail_template.send_mail(self.env.user.id, email_values=email_values, force_send=True)
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
