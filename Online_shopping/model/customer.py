@@ -21,10 +21,10 @@ class Customer(models.Model):
             rec.order_count = len(rec.order_ids)
 
     def create(self, vals):
-        print(vals)
+        # print(vals)
         if vals.get('customerID', _('New')) == _('New'):
             vals['customerID'] = self._generate_customerID()
-            print(vals['name'])
+            # print(vals['name'])
         return super(Customer, self).create(vals)
     
     def _generate_customerID(self):
@@ -33,7 +33,7 @@ class Customer(models.Model):
 
     @api.constrains('customerID')
     def _check_unique_customerID(self):
-        print(self)
+        # print(self)
         for record in self:
             if record.customerID:
                 existing_record = self.search([('customerID', '=', record.customerID)])
@@ -71,10 +71,10 @@ class Customer(models.Model):
                                 'subject': "Happy Birthday",
                                 # 'body_html': "<div><p>Wishing you a very happy birthday!</p></div>"
                                 }
-            print(email_values)
+            # print(email_values)
             mail_template = self.env.ref('Online_shopping.renew_bday_template')
             mail_template.with_context({}).send_mail(rec.id, email_values=email_values, force_send=True)
-            print("Successfully Send a Email For Bday wishes")
+            # print("Successfully Send a Email For Bday wishes")
             
         except Exception as e:
             print(e)

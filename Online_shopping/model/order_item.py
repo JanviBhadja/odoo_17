@@ -5,19 +5,20 @@ from odoo.exceptions import UserError
 class OrderItem(models.Model):
     _name = 'order.item'
     _description = 'Order Item'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'order_id'
 
-    order_id = fields.Many2one('product.order', string='Order', readonly=True)
+    order_id = fields.Many2one('product.order', string='Order', readonly=True, tracking=True)
     product_id = fields.Many2one('my.product.product', string='Product', required=True)
-    quantity = fields.Integer(string='Quantity', default=1)
+    quantity = fields.Integer(string='Quantity', default=1, tracking=True)
     price_unit = fields.Float(string='Unit Price', related='product_id.price', readonly=True)
     price_subtotal = fields.Float(string='Subtotal', compute='_compute_subtotal', store=True)
     
     @api.depends('quantity', 'price_unit')
     def _compute_subtotal(self):
         for item in self:
-            print(item)
-            print(self)
+            # print(item)
+            # print(self)
             item.price_subtotal = item.quantity * item.price_unit
 
     @api.constrains('quantity')

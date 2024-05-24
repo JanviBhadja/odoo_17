@@ -1,4 +1,9 @@
-from odoo import models, fields, api
+from odoo import fields, models, _, api
+from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError
+from datetime import datetime, timedelta
+import base64
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -107,7 +112,7 @@ class SaleOrder(models.Model):
 
         start_date = first_day_of_previous_month.strftime('%Y-%m-%d')
         end_date = last_day_of_previous_month.strftime('%Y-%m-%d')
-        print("start_date>>>>>>>>>>>>end_date",start_date,end_date)
+        # print("start_date>>>>>>>>>>>>end_date",start_date,end_date)
 
         
         commission_wizard = self.env['commission.sale.wizard']

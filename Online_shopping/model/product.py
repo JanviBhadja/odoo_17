@@ -14,7 +14,7 @@ class Product(models.Model):
 
     @api.model
     def create(self, vals):
-        print(self)
+        # print(self)
         vals['productId'] = self.env['ir.sequence'].sudo().next_by_code('my.product.product') or 'New'
         res = super(Product,self).create(vals)
         return res

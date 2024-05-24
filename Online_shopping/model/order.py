@@ -6,6 +6,7 @@ import base64
 class Order(models.Model):
     _name = 'product.order'
     _description = 'Order'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'orderId'
 
     order_date = fields.Datetime(string='Order Date')
@@ -89,12 +90,12 @@ class Order(models.Model):
         res = super(Order, self).write(vals)
         # if self.state == 'confirmed':
         confirmed_orders = self.filtered(lambda order: order.state == 'confirmed')
-        print('confirmed_orders',confirmed_orders)
+        # print('confirmed_orders',confirmed_orders)
         for order in confirmed_orders:
-            print(confirmed_orders)
+            # print(confirmed_orders)
             # Check if a delivery record already exists for the order
             existing_delivery = self.env['product.delivery.me'].search([('order_id', '=', order.id)], limit=1)
-            print('existing_delivery',existing_delivery)
+            # print('existing_delivery',existing_delivery)
             if existing_delivery:
                 # Update the existing delivery record
                 delivery_vals = {
@@ -103,7 +104,7 @@ class Order(models.Model):
                     'state' : 'ordered'
                 }
                 existing_delivery.write(delivery_vals)
-                print('existing_delivery',existing_delivery)
+                # print('existing_delivery',existing_delivery)
             else:
                 # Create a new product delivery record for each confirmed order
                 self.env['product.delivery.me'].create({
@@ -117,7 +118,7 @@ class Order(models.Model):
             query = """SELECT id FROM product_order"""
             self.env.cr.execute(query)
             order1 = self.env.cr.fetchall()
-            print("order1------>", order1)
+            # print("order1------>", order1)
         return res
 
     def cancel_order(self):

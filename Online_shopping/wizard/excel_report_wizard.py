@@ -18,35 +18,35 @@ class CommissionWizard(models.TransientModel):
         # Define styles
         bold_format = workbook.add_format({
             'bold': True, 'align': 'center', 'font_size': 10, 'valign': 'vcenter', 
-            'bg_color': '#FF5733', 'border': True, 'text_wrap': True
+            'bg_color': '#ADD8E6', 'border': True, 'text_wrap': True
         })
         header_format = workbook.add_format({
             'bold': True, 'align': 'center', 'font_size': 12, 'valign': 'vcenter', 
-            'bg_color': '#FFEB3B', 'font_color': '#FFFFFF', 'border': True, 'text_wrap': True
+            'bg_color': '#ADD8E6', 'font_color': 'black', 'border': True, 'text_wrap': True
         })
         normal_format = workbook.add_format({
-            'text_wrap': True, 'align': 'left', 'valign': 'top', 'border': True
+            'text_wrap': True, 'align': 'left', 'bg_color': '#E0FFFF', 'valign': 'top', 'border': True
         })
         number_format = workbook.add_format({
-            'num_format': '0.00', 'text_wrap': True, 'align': 'left', 'border': True
+            'num_format': '0.00', 'text_wrap': True, 'bg_color': '#E0FFFF', 'align': 'left', 'border': True
         })
         date_format = workbook.add_format({
-            'num_format': 'dd/mm/yy', 'align': 'left', 'valign': 'top', 'border': True
+            'num_format': 'dd/mm/yy', 'align': 'left', 'bg_color': '#E0FFFF', 'valign': 'top', 'border': True
         })
         total_format = workbook.add_format({
-            'bold': True, 'bg_color': '#FFEB3B', 'border': True  # Yellow background for totals
+            'bold': True, 'bg_color': '#ADD8E6', 'border': True 
         })
 
         # Set column sizes
         sheet.set_column('A:A', 7)
-        sheet.set_column('B:C',13)
-        sheet.set_column('D:E',15)
-        sheet.set_column('F:F',10)
-        sheet.set_column('G:G',25)
-        sheet.set_column('H:K',12)
-        sheet.set_column('N:N',10)
-        sheet.set_column('O:O',10)
-        sheet.set_default_row(20)  # Adjust the height as needed
+        # sheet.set_column('B:C',13)
+        # sheet.set_column('D:E',15)
+        # sheet.set_column('F:F',10)
+        # sheet.set_column('G:G',25)
+        # sheet.set_column('H:K',12)
+        # sheet.set_column('N:N',10)
+        # sheet.set_column('O:O',10)
+        sheet.set_default_row(20) 
         sheet.set_row(0, 30)
 
         # Write report header
