@@ -1,5 +1,6 @@
-from odoo import models, fields, api, _
+from odoo import models, fields, api, tools, _
 from odoo.exceptions import ValidationError
+from datetime import datetime
 import uuid
 
 class Customer(models.Model):
@@ -60,21 +61,23 @@ class Customer(models.Model):
 
     @api.model
     def bday_notification(self):
-        # for rec in self:
-        # print("ASDE")
         try:
-            records = self.search([('dob','=',fields.Date.today())])
+            today = datetime.now().date()
+            records = self.env['my.customer.customer'].search([
+                ('dob', '!=', False),  
+                ('dob', 'like', f"%-{today.month:02d}-{today.day:02d}"),
+            ])
 
             for rec in records:
-                            email_values = {
-                                'email_to': rec.email,
-                                'subject': "Happy Birthday",
-                                # 'body_html': "<div><p>Wishing you a very happy birthday!</p></div>"
-                                }
-            # print(email_values)
-            mail_template = self.env.ref('Online_shopping.renew_bday_template')
-            mail_template.with_context({}).send_mail(rec.id, email_values=email_values, force_send=True)
-            # print("Successfully Send a Email For Bday wishes")
-            
+                email_values = {
+                    'email_to': rec.email,
+                    'subject': "Happy Birthday"
+                }
+                mail_template = self.env.ref('Online_shopping.renew_bday_template')
+                mail_template.with_context({}).send_mail(rec.id, email_values=email_values, force_send=True)
+                print("Successfully Sent an Email For Birthday wishes")
+                
         except Exception as e:
             print(e)
+
+

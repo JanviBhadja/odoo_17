@@ -72,5 +72,31 @@
             </field>
         </record>
 
+        <record id="send_order_confirmation" model="mail.template">
+            <field name="name">Order Confirmation Email</field>
+            <field name="email_from">{{user.email}}</field> 
+            <field name="email_to">{{object.customer_id.email}}</field>
+            <field name="subject">Order Confirmation</field> 
+            <field name="model_id" ref="model_product_order"/>
+            <field name="auto_delete" eval="False"/> 
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; border-radius: 5px; font-size:13px;width:40%">
+                        <div>
+                            Hello,
+                            <p>
+                                Your order is confirmed.
+                                <br/><br/>
+                                Your order reference: <t t-out="object.orderId"/>
+                                <br/><br/>
+                                Thank you for ordering.
+                            </p>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </field>
+        </record>
+        
     </data>
 </odoo>

@@ -163,6 +163,15 @@ class OrderConfirmationButton(models.Model):
             'target': 'new',
         }
 
+# class Order(models.Model):
+#     _inherit = 'product.order'
+
+#     def action_confirm(self):
+#         res = super(Order, self).action_confirm()
+        # for order in self:
+        #     template_id = self.env.ref('Online_shopping.send_order_confirmation')
+        #     template_id.send_mail(order.id, force_send=True)
+        # return res
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -195,7 +204,6 @@ class ResPartner(models.Model):
             'context': ctx,
         }
 
-    # @api.model
     # def bday_notification(self):
     #     # for rec in self:
     #     # print("ASDE")
@@ -204,8 +212,7 @@ class ResPartner(models.Model):
 
     #         for rec in records:
     #                         email_values = {
-    #                             'email_to': rec
-    #                             .email,
+    #                             'email_to': rec.email,
     #                             'subject': "Happy Birthday",
     #                             # 'body_html': "<div><p>Wishing you a very happy birthday!</p></div>"
     #                             }

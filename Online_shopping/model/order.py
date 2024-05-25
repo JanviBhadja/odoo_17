@@ -38,7 +38,10 @@ class Order(models.Model):
     def action_confirm(self):
         for rec in self:
             rec.state = 'confirmed'
-    
+        for order in self:
+            template_id = self.env.ref('Online_shopping.send_order_confirmation')
+            template_id.send_mail(order.id, force_send=True)
+
     def action_cancel(self):
         for rec in self:
             rec.state = 'cancel'
