@@ -57,20 +57,21 @@
 
         <record id="email_template_sale_report" model="mail.template">
             <field name="name">Sale Report Email Template</field>
-            <field name="model_id" ref="sale.model_sale_order"/> 
-            <field name="subject">Sales Report for ${object.start_date} to ${object.end_date}</field>
-            <field name="email_from">${(object.env.user.email or 'noreply@example.com')}</field>
-            <field name="email_to">${object.env.user.email}</field>
-            <field name="lang">${object.env.user.lang}</field>
+            <field name="model_id" ref="model_sale_order"/> 
+            <field name="subject">Sales Report for {object.start_date} to {object.end_date}</field>
+            <field name="email_from">{object.env.user.email or 'noreply@example.com'}</field>
+            <field name="email_to">{object.salesperson_id.partner_id.email}</field>
+            <field name="lang">{object.env.user.lang}</field>
             <field name="auto_delete" eval="False"/>
-            <field name="body_html" type="xml">
+            <field name="body_html" type="html">
                 <div>
-                    <p>Hello,</p>
-                    <p>Please find attached the sales report for the period from ${object.start_date} to ${object.end_date}.</p>
+                    <p>Hello, {object.salesperson_id.partner_id.name or 'Salesperson'}</p>
+                    <p>Please find attached the sales report for the period from {object.start_date} to {object.end_date}.</p>
                     <p>Thank you.</p>
                 </div>
             </field>
         </record>
+
 
         <record id="send_order_confirmation" model="mail.template">
             <field name="name">Order Confirmation Email</field>

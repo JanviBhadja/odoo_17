@@ -39,13 +39,13 @@ class CommissionWizard(models.TransientModel):
 
         # Set column sizes
         sheet.set_column('A:A', 7)
-        # sheet.set_column('B:C',13)
-        # sheet.set_column('D:E',15)
-        # sheet.set_column('F:F',10)
-        # sheet.set_column('G:G',25)
-        # sheet.set_column('H:K',12)
-        # sheet.set_column('N:N',10)
-        # sheet.set_column('O:O',10)
+        sheet.set_column('B:C',13)
+        sheet.set_column('D:E',15)
+        sheet.set_column('F:F',10)
+        sheet.set_column('G:G',25)
+        sheet.set_column('H:K',12)
+        sheet.set_column('N:N',10)
+        sheet.set_column('O:O',10)
         sheet.set_default_row(20) 
         sheet.set_row(0, 30)
 

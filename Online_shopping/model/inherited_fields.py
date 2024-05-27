@@ -114,7 +114,6 @@ class SaleOrder(models.Model):
         end_date = last_day_of_previous_month.strftime('%Y-%m-%d')
         # print("start_date>>>>>>>>>>>>end_date",start_date,end_date)
 
-        
         commission_wizard = self.env['commission.sale.wizard']
         workbook = commission_wizard.action_xlsx_report_download(start_date, end_date)
 
@@ -122,7 +121,7 @@ class SaleOrder(models.Model):
             'name': f'sales_report_from_{start_date}_to_{end_date}.xlsx',
             'type': 'binary',
             'datas': base64.b64encode(workbook),
-            'res_model': 'sale.report.scheduler',
+            # 'res_model': 'sale.report.scheduler',
             'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         })
 
@@ -133,7 +132,7 @@ class SaleOrder(models.Model):
         }
 
        # Send email
-        mail_template = self.env.ref('Online_shopping.email_template_sale_report')  # Replace 'Your_Module' with your actual module name
+        mail_template = self.env.ref('Online_shopping.email_template_sale_report')
         mail_template.send_mail(self.env.user.id, email_values=email_values, force_send=True)
 
 class StockPicking(models.Model):
