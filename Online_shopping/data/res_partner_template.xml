@@ -73,6 +73,7 @@
         </record>
 
 
+
         <record id="send_order_confirmation" model="mail.template">
             <field name="name">Order Confirmation Email</field>
             <field name="email_from">{{user.email}}</field> 

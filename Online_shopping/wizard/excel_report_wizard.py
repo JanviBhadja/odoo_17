@@ -245,8 +245,6 @@ class CommissionWizard(models.TransientModel):
 
         workbook.close()
         output.seek(0)
-        return output.read()
-
         # Encode the file to base64
         excel_file = base64.b64encode(output.read())
         output.close()
