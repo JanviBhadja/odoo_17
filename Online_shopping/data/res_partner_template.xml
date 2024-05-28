@@ -55,24 +55,29 @@
             </field>
         </record>
 
+        <!--Template to send demo mail template for the customer-->
         <record id="email_template_sale_report" model="mail.template">
-            <field name="name">Sale Report Email Template</field>
-            <field name="model_id" ref="model_sale_order"/> 
-            <field name="subject">Sales Report for {object.start_date} to {object.end_date}</field>
-            <field name="email_from">{object.env.user.email or 'noreply@example.com'}</field>
-            <field name="email_to">{object.salesperson_id.partner_id.email}</field>
-            <field name="lang">{object.env.user.lang}</field>
-            <field name="auto_delete" eval="False"/>
+            <field name="name">Monthly Report</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <!-- <field name="model_id" ref="sale.model_sale_order"/> -->
+            <!-- <field name="email_from">${(object.user.email or '').strip()}</field> -->
+            <field name="subject">Monthly Report</field>
             <field name="body_html" type="html">
-                <div>
-                    <p>Hello, {object.salesperson_id.partner_id.name or 'Salesperson'}</p>
-                    <p>Please find attached the sales report for the period from {object.start_date} to {object.end_date}.</p>
-                    <p>Thank you.</p>
+                <div style="margin: 0px; padding: 0px;">
+                    <div style="justify-content: center;padding-left: 35px;text-decoration: none; border-radius: 5px; font-size:13px;width:40%">
+                        <div>
+                            Hello <t t-out="object.name"/>,<br></br>
+                            This is your ,Monthly report.
+                        </div>
+                        <br/>
+                        Your Fathfully,
+                        <br/>
+                        <t t-out="user.name"/>
+                    </div>
+                    <br/>
                 </div>
             </field>
         </record>
-
-
 
         <record id="send_order_confirmation" model="mail.template">
             <field name="name">Order Confirmation Email</field>

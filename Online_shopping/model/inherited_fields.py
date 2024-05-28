@@ -112,28 +112,31 @@ class SaleOrder(models.Model):
 
         start_date = first_day_of_previous_month.strftime('%Y-%m-%d')
         end_date = last_day_of_previous_month.strftime('%Y-%m-%d')
-        # print("start_date>>>>>>>>>>>>end_date",start_date,end_date)
 
-        commission_wizard = self.env['commission.sale.wizard']
-        workbook = commission_wizard.action_xlsx_report_download(start_date, end_date)
+        salespersons = self.env['res.users'].search([('share', '=', False)])
+        for salesperson in salespersons:
+            print('salesperson',salesperson.name)
+            report = self.env['send.sales.report'].action_xlsx_report_download(salesperson , start_date, end_date)
+            attachment = self.env['ir.attachment'].create({
+                'name': f'sales_report_from_{start_date}_to_{end_date}.xlsx',
+                'type': 'binary',
+                'datas': base64.b64encode(report),
+                'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            })
 
-        attachment = self.env['ir.attachment'].create({
-            'name': f'sales_report_from_{start_date}_to_{end_date}.xlsx',
-            'type': 'binary',
-            'datas': base64.b64encode(workbook),
-            # 'res_model': 'sale.report.scheduler',
-            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        })
+            # Prepare email values
+            email_values = {
+                'subject': f"Monthly Sales Report ({start_date} to {end_date})",
+                'email_to':f'{salesperson.login}',
+                'email_from':f'{self.env.user.email}',
+                'attachment_ids': [(4, attachment.id)],
+            }
 
-        # Prepare email values
-        email_values = {
-            'subject': f"Monthly Sales Report ({start_date} to {end_date})",
-            'attachment_ids': [(4, attachment.id)],
-        }
+            # Send email
+            mail_template = self.env.ref('Online_shopping.email_template_sale_report')
+            mail_template.send_mail(salesperson.id , email_values=email_values, force_send=True)
 
-       # Send email
-        mail_template = self.env.ref('Online_shopping.email_template_sale_report')
-        mail_template.send_mail(self.env.user.id, email_values=email_values, force_send=True)
+        return True
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'

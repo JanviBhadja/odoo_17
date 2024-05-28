@@ -242,39 +242,21 @@ class CommissionWizard(models.TransientModel):
             sheet2.write(row, 6, f"{currency_symbol}{i[6] or 'NA'}", normal_format)
             row += 1
 
-
         workbook.close()
         output.seek(0)
         # Encode the file to base64
         excel_file = base64.b64encode(output.read())
         output.close()
-
-        # Create an attachment
-        attachment = self.env['ir.attachment'].create({
-            'name': f'sales_report_from_{self.start_date}_to_{self.end_date}.xlsx',
-            'type': 'binary',
-            'datas': excel_file,
-            'res_model': 'commission.sale.wizard',
-            'res_id': self.id,
-            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        })
-
-        return {
-            'type': 'ir.actions.act_url',
-            'url': f'/web/content/{attachment.id}?download=true',
-            'target': 'self'
-        }
+        return excel_file
 
     def fetch_from_sale(self):
         action =  self.action_xlsx_report_download(self.start_date, self.end_date)
 
-        excel_file = base64.b64encode(action)
-
         # Create an attachment
         attachment = self.env['ir.attachment'].create({
             'name': f'sales_report_from_{self.start_date}_to_{self.end_date}.xlsx',
             'type': 'binary',
-            'datas': excel_file,
+            'datas': action,
             'res_model': 'commission.sale.wizard',
             'res_id': self.id,
             'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
