@@ -13,8 +13,11 @@ class Order(models.Model):
     customer_id = fields.Many2one('my.customer.customer', string='Customer')
     customer_email = fields.Char(string='Customer Email', related='customer_id.email', store=True)
     customer_address = fields.Text(string='Customer Address', related='customer_id.address', store=True)
-    order_item_ids = fields.One2many('order.item', 'order_id', string='Order Items')
+    order_item_ids = fields.One2many('order.item', 'order_id', string='Order Items', auto_join=True)
     total_amount = fields.Float(string='Total Amount', compute='_compute_total_amount', store=True)
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Currency', default=lambda self: self.env['res.currency'].search([('name', '=', 'USD')]).id)
     orderId = fields.Char(string='Order Id', readonly=True, default='New')
     state = fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed'), ('done', 'Done'), ('cancel','Cancel')], string='Status', default='draft')
     delivery_id = fields.Many2one('product.delivery.me' , string = 'Delivery ID' , readonly=True)

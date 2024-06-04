@@ -7,7 +7,10 @@ class Product(models.Model):
 
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
-    price = fields.Float(string='Price', required=True)
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Currency',default=lambda self: self.env['res.currency'].search([('name', '=', 'USD')]).id)
+    price = fields.Monetary(string='Price', required=True, currency_field='currency_id')
     category_id = fields.Many2one('product.category.me', string='Category')
     image = fields.Binary(string='Image')
     productId = fields.Char(string='Product Id' , readonly=True, copy=False)

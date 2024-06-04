@@ -25,6 +25,7 @@
                             <group>
                                 <field name="productId"/>
                                 <field name="category_id"/>
+                                <field name="currency_id" invisible="1"/>
                                 <field name="price"/>
                             </group>
                         </group>   
@@ -41,6 +42,7 @@
                     <field name="name"/>
                     <field name="description"/>
                     <field name="price"/>
+                    <field name="currency_id" column_invisible="1"/>
                     <field name="category_id"/>
                     <field name="image"/>
                     <field name="productId"/>

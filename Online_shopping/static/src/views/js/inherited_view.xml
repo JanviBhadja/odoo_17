@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="Online_shopping.modelInfoBtn" t-inherit="web.FormView">
+        <xpath expr="//t[@t-set-slot='layout-actions']" position="inside">
+            <button class="btn btn-primary" t-on-click="actionInfoForm">Info
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="hr_expence.NewButton" t-inherit="hr_expense.ListButtons" t-inherit-mode="extension">
+       <!-- hr.expense and hr.expense.sheet -->
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
+            <button class="d-none d-md-block btn btn-secondary"
+                    t-on-click="actionNewButton">
+                New Create Report 
+            </button>
+        </xpath>
+    </t>
+</templates>
+                                                                           
+

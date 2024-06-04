@@ -179,7 +179,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     commission_amount_on = fields.Float(string='Commission Amount On')
-    percentage = fields.Float(string="Percentage")
+    percentage = fields.Integer(string="Percentage")
     dob = fields.Date(string='Date of Birth')
 
     def action_send_email(self):

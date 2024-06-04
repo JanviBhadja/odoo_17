@@ -10,8 +10,12 @@ class OrderItem(models.Model):
 
     order_id = fields.Many2one('product.order', string='Order', readonly=True, tracking=True)
     product_id = fields.Many2one('my.product.product', string='Product', required=True)
-    quantity = fields.Integer(string='Quantity', default=1, tracking=True)
-    price_unit = fields.Float(string='Unit Price', related='product_id.price', readonly=True)
+    quantity = fields.Float(string='Quantity', tracking=True, default=1.0,
+        store=True, readonly=False, required=True)
+    price_unit = fields.Monetary(string='Unit Price', related='product_id.price', readonly=True)
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Currency', default=lambda self: self.env['res.currency'].search([('name', '=', 'USD')]).id)
     price_subtotal = fields.Float(string='Subtotal', compute='_compute_subtotal', store=True)
     
     @api.depends('quantity', 'price_unit')

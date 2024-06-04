@@ -16,7 +16,13 @@
                         <group>
                             <field name="name"/>
                             <field name="email"/>
-                            <field name="address"/>
+                            <group>
+                                <field name="address"/>
+                                <!-- <label for="address" string="Address"/>
+                                <div class="o_address_format">
+                                    <field name="address" placeholder="Address..." class="o_address"/>
+                                </div> -->
+                            </group>
                             <field name="customerID"/>
                             <field name="dob"/>
                         </group>
