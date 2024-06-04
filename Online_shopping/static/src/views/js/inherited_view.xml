@@ -7,8 +7,7 @@
         </xpath>
     </t>
 
-    <t t-name="hr_expence.NewButton" t-inherit="hr_expense.ListButtons" t-inherit-mode="extension">
-       <!-- hr.expense and hr.expense.sheet -->
+    <t t-name="Online_shopping.NewButton" t-inherit="hr_expense.ListButtons" t-inherit-mode="extension">
         <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
             <button class="d-none d-md-block btn btn-secondary"
                     t-on-click="actionNewButton">
@@ -16,6 +15,12 @@
             </button>
         </xpath>
     </t>
-</templates>
-                                                                           
 
+    <!-- <t t-name="Online_shopping.actionButton" t-inherit="web.ListView" t-inherit-mode="extension">
+        <xpath expr="//t[@t-set-slot='layout-actions']" position="inside">
+            <button class="btn btn-primary" t-on-click="actionInfoSale">
+                Create Report 
+            </button>
+        </xpath>
+    </t> -->
+</templates>

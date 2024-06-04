@@ -35,6 +35,14 @@ class StockRule(models.Model):
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
+    
+    def generate_report(self):
+        # Implement your report generation logic here
+        # For example, you can use QWeb or ReportLab to generate reports
+        # Once the report is generated, you can return it or do further processing
+        # For demonstration purposes, let's just print a message
+        print("Generating report for Sale Order:", self.name)
+        return True
 
     # commission = fields.Float(string="Commission", compute="compute_commision_amount")
     
