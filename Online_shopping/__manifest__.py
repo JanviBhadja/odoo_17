@@ -21,6 +21,7 @@
         "wizard/cancel_order_wizard_view.xml",
         "wizard/sale_report_wizard_view.xml",
         "wizard/excel_report_wizard_view.xml",
+
         "report/report_actions.xml",
         "report/order_report_templates.xml",
         "report/sale_order_report.xml",
@@ -28,8 +29,11 @@
         "report/order_delivery_report.xml",
         "report/commission_report.xml",
         "report/res_partner_email_template_report.xml",
+        "report/hr_expense_report.xml",
+
         "data/res_partner_template.xml",
         "data/bday_reminder_cron.xml",
+
         "views/menu_view.xml",
         "views/product_view.xml",
         "views/category_view.xml",

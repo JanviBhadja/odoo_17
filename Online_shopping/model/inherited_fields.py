@@ -36,13 +36,9 @@ class StockRule(models.Model):
 class SaleOrder(models.Model):
     _inherit = "sale.order"
     
-    def generate_report(self):
-        # Implement your report generation logic here
-        # For example, you can use QWeb or ReportLab to generate reports
-        # Once the report is generated, you can return it or do further processing
-        # For demonstration purposes, let's just print a message
-        print("Generating report for Sale Order:", self.name)
-        return True
+    # def generate_report(self): 
+    #     print("Generating report for Sale Order:", self.name)
+    #     return True
 
     # commission = fields.Float(string="Commission", compute="compute_commision_amount")
     
@@ -182,6 +178,25 @@ class OrderConfirmationButton(models.Model):
         #     template_id = self.env.ref('Online_shopping.send_order_confirmation')
         #     template_id.send_mail(order.id, force_send=True)
         # return res
+
+class HrExpense(models.Model):
+    _inherit = 'hr.expense'
+
+    # def generate_report(self, id):
+    #     order = http.request.env['expense'].browse(id)
+    #     if order:
+    #         order.generate_report()
+    #         return True
+    #     return False
+
+    def generate_report(self):
+        if len(self.ids) < 1:
+            data = self.env["hr.expense"].search([])
+            action = self.env.ref('Online_shopping.action_report_hr_expense').with_context(report = True, order_lines = data).report_action(data)
+            return action
+        else:
+            action = self.env.ref('Online_shopping.action_report_hr_expense').with_context(report = True, order_lines = self).report_action(self)
+            return action
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

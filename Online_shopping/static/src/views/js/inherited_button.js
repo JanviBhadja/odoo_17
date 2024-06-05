@@ -1,68 +1,70 @@
 /* @odoo-module */
-import { FormController } from "@web/views/form/form_controller";
-import { formView } from "@web/views/form/form_view";
-import { ListController } from "@web/views/list/list_controller";
-import { listView } from "@web/views/list/list_view";
-import { registry } from "@web/core/registry";
+    import { patch } from "@web/core/utils/patch";
+    import { ExpenseListController } from "@hr_expense/views/list";
 
-class jsClassModelInfo extends FormController {
-    actionInfoForm() {
-                alert("Hi")
-    }
-}
-jsClassModelInfo.template = "Online_shopping.modelInfoBtn";
+    patch(ExpenseListController.prototype, {
 
-export const modelInfoView = {
-    ...formView,
-    Controller: jsClassModelInfo,
-};
-registry.category("views").add("model_info", modelInfoView);
+        async actionNewButton() {
+            const records = this.model.root.selection;
+            // const recordId = records.map((a) => a.resId)
+            // console.log(typeof records)
+            // console.log(records)
+            // console.log(recordId)
+            // for (var key in records) {
+            //     console.log(key + ":" + records[key])
+            // }
+            // let keys = records[key].data
+            // console.log(keys) 
+            // console.log(keys.name)
+            // console.log(keys.total_amount)
+            // console.log(keys.company_id)
+
+            // console.log(records.reduce(()))
+            // for (const key in records) {
+            //     const orderId = records[key].data.id;
+            //     rpc.query({
+            //         model: 'hr.expense',
+            //         method: 'generate_report',
+            //         args: [orderId],
+            //     }).then(result => {
+            //         console.log('Report generated:', result);
+            //     }).fail(error => {
+            //         console.error('Failed to generate report:', error);
+            //     });
+            // }
+            const res = await this.orm.call(this.model.config.resModel, 'generate_report', [records.map((record) => record.resId)]);
+            // console.log(res)
+            if (res) {
+                await this.actionService.doAction(res, {});
+            }
+        }
+    });
 
 // class jsClassModelInfo extends FormController {
-//     constructor() {
-//         super(...arguments);
-//         this.actionInfoForm = this.actionInfoForm.bind(this); // Bind the method to the class instance
-//     }
-
-//     async actionInfoForm(ev) {
-//         alert("Hi");
-//         try {
-//             // Call Odoo RPC to trigger the server-side action for report generation
-//             const result = await this._rpc({
-//                 model: 'sale.order',
-//                 method: 'generate_report',
-//                 args: [[this.handle], {}], // Pass the selected record ID(s) if needed
-//             });
-//             // Handle the response if needed
-//             console.log(result);
-//         } catch (error) {
-//             console.error("Error:", error);
-//         }
+//     actionInfoForm() {
+//                 alert("Hi")
 //     }
 // }
+// jsClassModelInfo.template = "Online_shopping.modelInfoBtn";
 
-class jsClassModelListInfo extends ListController {
-    actionNewButton() {
-                alert("Hii Janvii")
-    }
-}
-jsClassModelListInfo.template = "Online_shopping.NewButton";
+// export const modelInfoView = {
+//     ...formView,
+//     Controller: jsClassModelInfo,
+// };
+// registry.category("views").add("model_info", modelInfoView);
 
-export const modelInfoListView = {
-    ...listView,
-    Controller: jsClassModelListInfo,
-};
-registry.category("views").add("model_hr", modelInfoListView);
 
 // class jsClassModelListInfo extends ListController {
 //     actionNewButton() {
 //                 alert("Hii Janvii")
 //     }
 // }
-// jsClassModelSaleInfo.template = "Online_shopping.actionButton";
+// jsClassModelListInfo.template = "Online_shopping.NewButton";
 
-// export const modelInfoSaleView = {
+// export const modelInfoListView = {
 //     ...listView,
-//     Controller: jsClassModelSaleInfo,
+//     Controller: jsClassModelListInfo,
 // };
-// registry.category("views").add("model_sale", modelInfoSaleView);
+// registry.category("views").add("model_hr", modelInfoListView);
+
+
