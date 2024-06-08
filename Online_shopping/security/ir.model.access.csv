@@ -10,3 +10,5 @@ access_sale_report_wizard,sale.report.wizard_access,model_sale_report_wizard,bas
 access_commission,commission_access,model_commission,base.group_user,1,1,1,1
 access_commission_on_line,commission.on.line_access,model_commission_on_line,base.group_user,1,1,1,1
 access_commission_sale_wizard,commission.sale.wizard_access,model_commission_sale_wizard,base.group_user,1,1,1,1
+Online_shopping.access_my_product_stock,access_my_product_stock,Online_shopping.model_my_product_stock,base.group_user,1,1,1,1
+Online_shopping.access_send_sales_report,access_send_sales_report,Online_shopping.model_send_sales_report,base.group_user,1,1,1,1

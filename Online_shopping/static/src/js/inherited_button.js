@@ -6,6 +6,11 @@
 
         async actionNewButton() {
             const records = this.model.root.selection;
+            const res = await this.orm.call(this.model.config.resModel, 'generate_report', [records.map((record) => record.resId)]);
+            console.log(res)
+            if (res) {
+                await this.actionService.doAction(res, {});
+            }
             // const recordId = records.map((a) => a.resId)
             // console.log(typeof records)
             // console.log(records)
@@ -31,40 +36,6 @@
             //     }).fail(error => {
             //         console.error('Failed to generate report:', error);
             //     });
-            // }
-            const res = await this.orm.call(this.model.config.resModel, 'generate_report', [records.map((record) => record.resId)]);
-            // console.log(res)
-            if (res) {
-                await this.actionService.doAction(res, {});
-            }
+            // } 
         }
     });
-
-// class jsClassModelInfo extends FormController {
-//     actionInfoForm() {
-//                 alert("Hi")
-//     }
-// }
-// jsClassModelInfo.template = "Online_shopping.modelInfoBtn";
-
-// export const modelInfoView = {
-//     ...formView,
-//     Controller: jsClassModelInfo,
-// };
-// registry.category("views").add("model_info", modelInfoView);
-
-
-// class jsClassModelListInfo extends ListController {
-//     actionNewButton() {
-//                 alert("Hii Janvii")
-//     }
-// }
-// jsClassModelListInfo.template = "Online_shopping.NewButton";
-
-// export const modelInfoListView = {
-//     ...listView,
-//     Controller: jsClassModelListInfo,
-// };
-// registry.category("views").add("model_hr", modelInfoListView);
-
-

@@ -72,7 +72,6 @@
                         <field name="customer_rank" invisible="1"/>
                     </group>
                     <header>
-                        <!-- The button will be visible only if 'customer_rank' is greater than 0 (indicating a customer) -->
                         <button string="Send Mail" name="action_send_email" type="object" class="oe_highlight" invisible="customer_rank == 0"/>
                     </header>
                 </xpath>
@@ -142,5 +141,6 @@
                 </xpath>
             </field>
         </record> -->
+        
     </data>
 </odoo>

@@ -5,6 +5,7 @@ from io import BytesIO
 
 class SendSalesReport(models.TransientModel):
     _name = 'send.sales.report'
+    _description = 'This is sale report'
 
     def action_xlsx_report_download(self, salesperson_id, start_date, end_date):
         output = BytesIO()

@@ -2,6 +2,7 @@ from odoo import models, fields, api
 
 class SaleReportWizard(models.TransientModel):
     _name = 'sale.report.wizard'
+    _description = 'This is report Wizard'
 
     order_id = fields.Many2one('sale.order', string='Sale Order')
     sale_order_line_ids = fields.Many2many('sale.order.line', string='Sale Order Lines')

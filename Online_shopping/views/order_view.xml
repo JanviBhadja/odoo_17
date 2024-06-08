@@ -132,6 +132,7 @@
             <field name="name">Order</field>
             <field name="res_model">product.order</field>
             <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('payment_status', '=', 'confirm')]</field>
         </record>
 
         <menuitem id="menu_order_form" 

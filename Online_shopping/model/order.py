@@ -85,13 +85,13 @@ class Order(models.Model):
             order.total_amount = sum(order_item.price_subtotal for order_item in order.order_item_ids)
 
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         vals['orderId'] = self.env['ir.sequence'].sudo().next_by_code('product.order') or 'New'
         res = super(Order,self).create(vals)
         return res
     
-    @api.model
+    @api.model_create_multi
     def write(self, vals):
         res = super(Order, self).write(vals)
         # if self.state == 'confirmed':
@@ -116,7 +116,7 @@ class Order(models.Model):
                 self.env['product.delivery.me'].create({
                     'order_id': order.id,
                     'customer_id': order.customer_id.id,
-                    'delivery_date': fields.Date.today() + timedelta(days=3),  # Set your expected delivery date here
+                    'delivery_date': fields.Date.today() + timedelta(days=3),  
                     'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , # Set payment status
                     'state' : 'ordered'
                 })

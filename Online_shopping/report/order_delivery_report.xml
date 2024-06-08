@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="gst_ffb_report_picking_inherit" inherit_id="stock.report_picking">
+    <template id="report_picking_inherit" inherit_id="stock.report_picking">
         <xpath expr="//div[@class='row']/div[@name='div_outgoing_address']/div[@t-if='o.should_print_delivery_address()']/span" position="before">
             <table class="table table-sm table-borderless">
                 <strong>Nick Name:</strong>
