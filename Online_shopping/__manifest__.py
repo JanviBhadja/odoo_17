@@ -6,21 +6,23 @@
     'description': '',
     'sequence': 10,
     'category': 'E Commerce',
-    'depends': ['base', 'web', 'purchase', 'hr_expense', 'stock', 'sale', 'sale_management', 'sale_stock', 'website_sale'],
+    'depends': ['base', 'web', 'purchase', 'hr_expense', 'stock', 'sale', 'sale_management', 'sale_stock', 'website_sale','portal'],
 
     'assets': {
         'web.assets_backend': [
             "Online_shopping/static/src/views/inherited_view.xml",
-            "Online_shopping/static/src/views/js/inherited_button.js",
+            "Online_shopping/static/src/js/inherited_button.js",
         ],
         'web.assets_frontend':[
             "Online_shopping/static/src/js/demoCode.js",   
+            "Online_shopping/static/src/js/portal_button.js",   
         ],
     },
 
     'data': [
         "security/ir.model.access.csv",
         "security/shopping_groups.xml",
+        
         "wizard/cancel_order_wizard_view.xml",
         "wizard/sale_report_wizard_view.xml",
         "wizard/excel_report_wizard_view.xml",
