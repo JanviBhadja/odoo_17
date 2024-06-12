@@ -109,7 +109,7 @@
             </field>
         </record>
 
-        <!-- <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
             <field name="name">sale.order</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
@@ -118,7 +118,7 @@
                     <attribute name="js_class">model_info</attribute>
                 </xpath>
             </field>
-        </record> -->
+        </record>
 
         <record id="view_hr_expense_tree_inherit" model="ir.ui.view">
             <field name="name">hr.expense</field>
@@ -131,13 +131,13 @@
             </field>
         </record>
 
-        <!-- <record id="view_sale_order_tree_inherit" model="ir.ui.view">
-            <field name="name">sale.order</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.sale_order_tree"/>
+        <!-- <record id="view_product_order_form_inherit" model="ir.ui.view">
+            <field name="name"></field>
+            <field name="model">product.order</field>
+            <field name="inherit_id" ref="Online_shopping.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree" position="attributes">
-                    <attribute name="js_class">model_sale</attribute>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="js_class">model_order</attribute>
                 </xpath>
             </field>
         </record> -->
