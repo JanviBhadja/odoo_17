@@ -15,6 +15,8 @@
             "Online_shopping/static/src/js/planning_button.js",
             "Online_shopping/static/src/js/icon_button.js",
             "Online_shopping/static/src/js/info_button.js",
+            "Online_shopping/static/src/js/select_all.js",
+
         ],
         'web.assets_frontend':[
             "Online_shopping/static/src/js/demoCode.js",   

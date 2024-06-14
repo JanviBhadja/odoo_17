@@ -108,7 +108,6 @@ class SaleOrder(models.Model):
         return super(SaleOrder, self)._get_order_lines_to_report()
 
     def generate_and_send_monthly_report(self):
-        # Calculate dates for the previous month
         today = fields.Date.today()
         first_day_of_current_month = today.replace(day=1)
         last_day_of_previous_month = first_day_of_current_month - timedelta(days=1)
@@ -128,7 +127,6 @@ class SaleOrder(models.Model):
                 'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             })
 
-            # Prepare email values
             email_values = {
                 'subject': f"Monthly Sales Report ({start_date} to {end_date})",
                 'email_to':f'{salesperson.login}',
@@ -136,7 +134,6 @@ class SaleOrder(models.Model):
                 'attachment_ids': [(4, attachment.id)],
             }
 
-            # Send email
             mail_template = self.env.ref('Online_shopping.email_template_sale_report')
             mail_template.send_mail(salesperson.id , email_values=email_values, force_send=True)
 
@@ -181,13 +178,6 @@ class OrderConfirmationButton(models.Model):
 
 class HrExpense(models.Model):
     _inherit = 'hr.expense'
-
-    # def generate_report(self, id):
-    #     order = http.request.env['expense'].browse(id)
-    #     if order:
-    #         order.generate_report()
-    #         return True
-    #     return False
 
     def generate_report(self):
         if len(self.ids) < 1:

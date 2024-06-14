@@ -84,14 +84,11 @@ class Order(models.Model):
         for order in self:
             order.total_amount = sum(order_item.price_subtotal for order_item in order.order_item_ids)
 
-
-    @api.model_create_multi
     def create(self, vals):
         vals['orderId'] = self.env['ir.sequence'].sudo().next_by_code('product.order') or 'New'
         res = super(Order,self).create(vals)
         return res
     
-    @api.model_create_multi
     def write(self, vals):
         res = super(Order, self).write(vals)
         # if self.state == 'confirmed':
@@ -99,7 +96,7 @@ class Order(models.Model):
         # print('confirmed_orders',confirmed_orders)
         for order in confirmed_orders:
             # print(confirmed_orders)
-            # Check if a delivery record already exists for the order
+            # Check delivery record already exists or not
             existing_delivery = self.env['product.delivery.me'].search([('order_id', '=', order.id)], limit=1)
             # print('existing_delivery',existing_delivery)
             if existing_delivery:
@@ -112,12 +109,12 @@ class Order(models.Model):
                 existing_delivery.write(delivery_vals)
                 # print('existing_delivery',existing_delivery)
             else:
-                # Create a new product delivery record for each confirmed order
+               
                 self.env['product.delivery.me'].create({
                     'order_id': order.id,
                     'customer_id': order.customer_id.id,
                     'delivery_date': fields.Date.today() + timedelta(days=3),  
-                    'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , # Set payment status
+                    'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , 
                     'state' : 'ordered'
                 })
             # query = """ALTER TABLE product_category_me DROP COLUMN create_uid"""
@@ -135,6 +132,8 @@ class Order(models.Model):
             'view_mode': 'form',
             'target': 'new',
         }
+    
+    
 
     # def confirm_order_with_email(self):
     #     self.action_confirm()

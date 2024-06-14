@@ -14,13 +14,11 @@ class ProductDelivery(models.Model):
 
     state = fields.Selection([('ordered', 'Ordered'), ('delivered', 'Delivered'), ('Cancel', 'Cancel')], string="Status")
 
-    @api.model_create_multi
     def create(self, vals):
         vals['deliveryId'] = self.env['ir.sequence'].sudo().next_by_code('product.delivery.me') or 'New'
         res = super(ProductDelivery,self).create(vals)
         return res
     
-    @api.model_create_multi
     def write(self, vals):
         res = super(ProductDelivery, self).write(vals)
         for delivery in self:

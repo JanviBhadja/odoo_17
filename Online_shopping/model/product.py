@@ -15,7 +15,6 @@ class Product(models.Model):
     image = fields.Binary(string='Image')
     productId = fields.Char(string='Product Id' , readonly=True, copy=False)
 
-    @api.model_create_multi
     def create(self, vals):
         # print(self)
         vals['productId'] = self.env['ir.sequence'].sudo().next_by_code('my.product.product') or 'New'

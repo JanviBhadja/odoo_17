@@ -53,7 +53,7 @@
             <field name="name">Order Form</field>
             <field name="model">product.order</field>
             <field name="arch" type="xml">
-                <form string="Order Form">
+                <form string="Order Form" js_class="auto_save">
                     <header>
                         <field name="state" widget="statusbar"  options="{'clickable' : '1'}" />
                         <button name="confirm_order" string="Confirm Order" type="object" class="btn-primary"/>
