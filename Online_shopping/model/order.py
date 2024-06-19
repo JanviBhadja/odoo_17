@@ -39,6 +39,7 @@ class Order(models.Model):
             rec.state = 'draft'
 
     def action_confirm(self):
+        print("Hiii")
         for rec in self:
             rec.state = 'confirmed'
         for order in self:
@@ -71,21 +72,22 @@ class Order(models.Model):
         for order in self:
             order.order_item_count = len(order.order_item_ids)
 
-    @api.depends('order_item_ids')
-    def _compute_order_item_details(self):
-        for order in self:
-            order.order_item_product_ids = order.order_item_ids.mapped('product_id')
-            order.order_item_quantities = [(6, 0, order.order_item_ids.mapped('quantity'))]
-            order.order_item_prices_unit = [(6, 0, order.order_item_ids.mapped('price_unit'))]
-            order.order_item_subtotals = [(6, 0, order.order_item_ids.mapped('price_subtotal'))]
+    # @api.depends('order_item_ids')
+    # def _compute_order_item_details(self):
+    #     for order in self:
+    #         order.order_item_product_ids = order.order_item_ids.mapped('product_id')
+    #         order.order_item_quantities = [(6, 0, order.order_item_ids.mapped('quantity'))]
+    #         order.order_item_prices_unit = [(6, 0, order.order_item_ids.mapped('price_unit'))]
+    #         order.order_item_subtotals = [(6, 0, order.order_item_ids.mapped('price_subtotal'))]
 
     @api.depends('order_item_ids')
     def _compute_total_amount(self):
         for order in self:
             order.total_amount = sum(order_item.price_subtotal for order_item in order.order_item_ids)
 
+    @api.model
     def create(self, vals):
-        vals['orderId'] = self.env['ir.sequence'].sudo().next_by_code('product.order') or 'New'
+        vals['orderId'] = self.env['ir.sequence'].next_by_code('product.order') or 'New'
         res = super(Order,self).create(vals)
         return res
     
@@ -133,7 +135,12 @@ class Order(models.Model):
             'target': 'new',
         }
     
-    
+    def download_report(self):
+        data = self.env["product.order"].search([('state', '=', 'confirmed')])
+        print("data",data)
+        action = self.env.ref('Online_shopping.action_report_product_order').with_context(report = True, order_lines = data).report_action(data)
+        return action
+
 
     # def confirm_order_with_email(self):
     #     self.action_confirm()

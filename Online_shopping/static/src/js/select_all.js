@@ -8,7 +8,7 @@ class AutoSaveController extends FormController {
         alert("Hello, Janvi");
         const records = this.model.root.selection;
         console.log(records);
-        const res = await this.orm.call(this.model.config.resModel, 'generate_report', [records.map((record) => record.resId)]);
+        const res = await this.orm.call(this.model.config.resModel, 'generate_report');
         // console.log(res)
         if (res) {
             await this.actionService.doAction(res, {});

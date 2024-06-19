@@ -11,9 +11,6 @@
                             <h3>Name: <t style="text-transform: uppercase;" t-esc="o.customer_id"/></h3>
                             <h3>Email: <t style="text-transform: uppercase;" t-esc="o.customer_email"/></h3>
                             <h3>Customer Address: <t style="text-transform: uppercase;" t-esc="o.customer_address"/></h3>
-                            <!-- <div>
-                                <span t-field="o.orderId" t-options="{'widget': 'barcode', 'img_style': 'width:100%;'}">Default Barcode Name</span>
-                            </div> -->
                             <table class="table table-sm o_main_table table-borderless mt-4" style="text-align: center;">
                                 <thead>
                                     <tr>

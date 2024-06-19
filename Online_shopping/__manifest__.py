@@ -6,7 +6,7 @@
     'description': '',
     'sequence': 10,
     'category': 'E Commerce',
-    'depends': ['base', 'web', 'planning', 'purchase', 'hr_expense', 'stock', 'sale', 'sale_management', 'sale_stock', 'website_sale','portal'],
+    'depends': ['base', 'planning', 'purchase', 'hr_expense', 'sale_management', 'sale_stock', 'website_sale','portal', 'point_of_sale'],
 
     'assets': {
         'web.assets_backend': [
@@ -16,11 +16,15 @@
             "Online_shopping/static/src/js/icon_button.js",
             "Online_shopping/static/src/js/info_button.js",
             "Online_shopping/static/src/js/select_all.js",
-
+            "Online_shopping/static/src/js/select_all_list.js",
         ],
         'web.assets_frontend':[
             "Online_shopping/static/src/js/demoCode.js",   
             "Online_shopping/static/src/js/portal_button.js",     
+        ],
+        'point_of_sale._assets_pos':[
+            'Online_shopping/static/src/js/pos_button.js',
+            'Online_shopping/static/src/views/pos_button.xml',
         ],
     },
 

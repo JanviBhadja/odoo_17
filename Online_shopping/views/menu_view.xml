@@ -8,7 +8,8 @@
         <menuitem 
                 id="menu_order_folder" 
                 name="Order" 
-                parent="root_menu"/>
+                parent="root_menu"
+                />
 
         <!-- product menu -->
         <menuitem 

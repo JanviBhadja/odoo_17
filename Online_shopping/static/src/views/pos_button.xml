@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.PosButton">
+        <button class="control-button" t-on-click="() => this.onClick()">
+            <i class="fa fa-superpowers" role="img" aria-label="POS Button" title="POS Button"/>
+                <span>POS Button</span>
+        </button>
+    </t>
+
+    <!-- <t t-name="point_of_sale.PosButton2">
+        <button class="control-button" t-on-click="() => this.onClick()">
+            <i class="fa fa-superpowers" role="img" aria-label="POS Button2" title="POS Button2"/>
+                <span>POS Button2</span>
+        </button>
+    </t>
+
+    <t t-name="point_of_sale.PosButton3">
+        <button class="control-button" t-on-click="() => this.onClick()">
+            <i class="fa fa-superpowers" role="img" aria-label="POS Button3" title="POS Button3"/>
+                <span>POS Button3</span>
+        </button>
+    </t> -->
+
+</templates>
