@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
     <t t-name="point_of_sale.PosButton">
-        <button class="control-button" t-on-click="() => this.onClick()">
+        <button class="control-button" t-on-click="() => this.onRemoveAll()">
             <i class="fa fa-superpowers" role="img" aria-label="POS Button" title="POS Button"/>
                 <span>POS Button</span>
         </button>
     </t>
+
+    
+
+    <!-- <t t-name="point_of_sale.Popup">
+        <div t-if="props.showPopup" class="popup-box position-fixed w-100 h-100 d-flex align-items-center justify-content-center">
+            <div class="popup-content bg-white p-4 shadow-lg rounded">
+                <div class="popup-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Product Details</h5>
+                    <button class="btn-close" aria-label="Close" t-on-click="props.onClosePopup"></button>
+                </div>
+                <div class="popup-body mt-3">
+                    <p t-esc="props.productInfo" />
+                </div>
+            </div>
+        </div>
+    </t> -->
 
     <!-- <t t-name="point_of_sale.PosButton2">
         <button class="control-button" t-on-click="() => this.onClick()">
