@@ -2,16 +2,16 @@
 
 import { usePos } from "@point_of_sale/app/store/pos_hook";
 import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";
-import { ErrorPopup } from "@point_of_sale/app/errors/popups/error_popup";
+// import { ErrorPopup } from "@point_of_sale/app/errors/popups/error_popup";
 import { Component } from "@odoo/owl";
-import { ProductCard } from "@point_of_sale/app/generic_components/product_card/product_card";
+// import { ProductCard } from "@point_of_sale/app/generic_components/product_card/product_card";
 
 export class PosButton extends Component {
     static template = "point_of_sale.PosButton";
 
     setup() {
         this.pos = usePos();
-        this.popup = useService("popup");
+        // this.popup = useService("popup");
     }
 
     // async onRemoveAll(){
@@ -50,19 +50,19 @@ ProductScreen.addControlButton({
     position: ["after", "CustomerButton"],
 });
 
-export class PopupBox extends ProductCard {
-    static template = "point_of_sale.ProductCard";
+// export class PopupBox extends ProductCard {
+//     static template = "point_of_sale.ProductCard";
 
-    setup() {
-        this.pos = usePos();
-        this.popup = useService("popup");
-    }
+//     setup() {
+//         this.pos = usePos();
+//         this.popup = useService("popup");
+//     }
 
-    async onProductInfoClick() {    
-        this.popup.add(ErrorPopup, {  
-        title: _t('Custom Alert'),
-        body: _t('Choose the alert type')
-        }) 
-    }
+//     async onProductInfoClick() {    
+//         this.popup.add(ErrorPopup, {  
+//         title: _t('Custom Alert'),
+//         body: _t('Choose the alert type')
+//         }) 
+//     }
 
-}
+// }

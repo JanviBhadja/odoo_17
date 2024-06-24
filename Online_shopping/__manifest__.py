@@ -7,7 +7,6 @@
     'sequence': 10,
     'category': 'E Commerce',
     'depends': ['base', 'planning', 'purchase', 'hr_expense', 'sale_management', 'sale_stock', 'website_sale','portal', 'point_of_sale'],
-
     'assets': {
         'web.assets_backend': [
             "Online_shopping/static/src/views/inherited_view.xml",
@@ -25,6 +24,8 @@
         'point_of_sale._assets_pos':[
             'Online_shopping/static/src/js/pos_button.js',
             'Online_shopping/static/src/views/pos_button.xml',
+            'Online_shopping/static/src/js/quantity.js',
+            'Online_shopping/static/src/js/custom_registry.js',
         ],
     },
 

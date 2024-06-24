@@ -7,8 +7,6 @@
         </button>
     </t>
 
-    
-
     <!-- <t t-name="point_of_sale.Popup">
         <div t-if="props.showPopup" class="popup-box position-fixed w-100 h-100 d-flex align-items-center justify-content-center">
             <div class="popup-content bg-white p-4 shadow-lg rounded">
@@ -23,18 +21,19 @@
         </div>
     </t> -->
 
-    <!-- <t t-name="point_of_sale.PosButton2">
-        <button class="control-button" t-on-click="() => this.onClick()">
-            <i class="fa fa-superpowers" role="img" aria-label="POS Button2" title="POS Button2"/>
-                <span>POS Button2</span>
-        </button>
+    <t t-name="point_of_sale.quantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">
+            <div class="product-count fs-6 text-muted subentry">
+                Total Product:
+                <t t-esc="props.productCount"/>
+            </div>
+        </xpath>
     </t>
 
-    <t t-name="point_of_sale.PosButton3">
-        <button class="control-button" t-on-click="() => this.onClick()">
-            <i class="fa fa-superpowers" role="img" aria-label="POS Button3" title="POS Button3"/>
-                <span>POS Button3</span>
-        </button>
-    </t> -->
+<t t-name="point_of_sale.quantity" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+    <xpath expr="//OrderWidget[@t-slot-scope='scope']" position="attributes">
+        <attribute name="productCount"><t t-esc="props.productCount"/></attribute>
+    </xpath>
+</t>
 
 </templates>
