@@ -17,7 +17,6 @@ class CancelOrderWizard(models.TransientModel):
             return {'type': 'ir.actions.act_window_close'}
         else:
             raise UserError('Incorrect password! Please try again.')
-            # If the password is incorrect, show an error message
             # return {
             #     'type': 'ir.actions.act_window',
             #     'res_model': 'cancel.order.wizard',

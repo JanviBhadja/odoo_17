@@ -25,7 +25,8 @@
             'Online_shopping/static/src/js/pos_button.js',
             'Online_shopping/static/src/views/pos_button.xml',
             'Online_shopping/static/src/js/quantity.js',
-            'Online_shopping/static/src/js/custom_registry.js',
+            'Online_shopping/static/src/js/add_notes_popup.js',
+            'Online_shopping/static/src/js/discount_button.js',
         ],
     },
 

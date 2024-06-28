@@ -52,9 +52,9 @@ class Customer(models.Model):
     def action_order_list(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Order',
+            'name': 'Orders',
             'res_model': 'product.order',
-            'view_mode': 'tree,form,calendar',
+            'view_mode': 'form',
             'target':'new',
             'domain': [('customer_id', '=', self.id)]
         }

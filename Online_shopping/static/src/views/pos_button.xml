@@ -7,33 +7,32 @@
         </button>
     </t>
 
-    <!-- <t t-name="point_of_sale.Popup">
-        <div t-if="props.showPopup" class="popup-box position-fixed w-100 h-100 d-flex align-items-center justify-content-center">
-            <div class="popup-content bg-white p-4 shadow-lg rounded">
-                <div class="popup-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Product Details</h5>
-                    <button class="btn-close" aria-label="Close" t-on-click="props.onClosePopup"></button>
-                </div>
-                <div class="popup-body mt-3">
-                    <p t-esc="props.productInfo" />
-                </div>
-            </div>
-        </div>
-    </t> -->
+    <t t-name="point_of_sale.AddNotes">
+        <button class="control-button" t-on-click="() => this.onButtonAddedNote()">
+            <i class="fa fa-superpowers" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
+                <span>Add Notes</span>
+        </button>
+    </t>
+
+    <t t-name="point_of_sale.Discount">
+        <button class="control-button" t-on-click="() => this.onButtonDiscount()">
+            <i class="fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
+                <span>% Discount</span>
+        </button>
+    </t>
 
     <t t-name="point_of_sale.quantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
         <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">
             <div class="product-count fs-6 text-muted subentry">
                 Total Product:
-                <t t-esc="props.productCount"/>
             </div>
         </xpath>
     </t>
 
-<t t-name="point_of_sale.quantity" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
-    <xpath expr="//OrderWidget[@t-slot-scope='scope']" position="attributes">
-        <attribute name="productCount"><t t-esc="props.productCount"/></attribute>
-    </xpath>
-</t>
+    <t t-name="point_of_sale.quantity" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+        <xpath expr="//OrderWidget[@t-slot-scope='scope']" position="attributes">
+            <attribute name="productCount"><t t-esc="state.totalProductCount"/></attribute>
+        </xpath>
+    </t>
 
 </templates>

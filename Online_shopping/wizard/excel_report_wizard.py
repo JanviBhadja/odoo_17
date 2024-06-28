@@ -252,7 +252,6 @@ class CommissionWizard(models.TransientModel):
     def fetch_from_sale(self):
         action =  self.action_xlsx_report_download(self.start_date, self.end_date)
 
-        # Create an attachment
         attachment = self.env['ir.attachment'].create({
             'name': f'sales_report_from_{self.start_date}_to_{self.end_date}.xlsx',
             'type': 'binary',

@@ -49,20 +49,3 @@ ProductScreen.addControlButton({
     component: PosButton,
     position: ["after", "CustomerButton"],
 });
-
-// export class PopupBox extends ProductCard {
-//     static template = "point_of_sale.ProductCard";
-
-//     setup() {
-//         this.pos = usePos();
-//         this.popup = useService("popup");
-//     }
-
-//     async onProductInfoClick() {    
-//         this.popup.add(ErrorPopup, {  
-//         title: _t('Custom Alert'),
-//         body: _t('Choose the alert type')
-//         }) 
-//     }
-
-// }
