@@ -250,3 +250,28 @@ class ResPartner(models.Model):
 #             raise UserError(_('Error: Available quantity is zero!'))
 
 #         return available_quantity
+
+
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
+
+    note = fields.Char(string="Added Note")
+
+    @api.model
+    def _order_fields(self, ui_order):
+        original_result = super(PosOrder, self)._order_fields(ui_order)
+        original_result['note'] = ui_order.get('note', "")
+        return original_result
+
+    def get_discount(self):
+        param_obj = self.env['ir.config_parameter'].sudo()
+        discount_limit = param_obj.get_param('discount')
+        return float(discount_limit)
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    discount = fields.Integer(string="Dicount",
+    config_parameter = 'discount'
+    )
+        

@@ -14,13 +14,6 @@
         </button>
     </t>
 
-    <t t-name="point_of_sale.Discount">
-        <button class="control-button" t-on-click="() => this.onButtonDiscount()">
-            <i class="fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
-                <span>% Discount</span>
-        </button>
-    </t>
-
     <t t-name="point_of_sale.quantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
         <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">
             <div class="product-count fs-6 text-muted subentry">

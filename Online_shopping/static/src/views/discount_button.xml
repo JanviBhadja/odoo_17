@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.Discount">
+        <button class="control-button" t-on-click="() => this.onClickDiscountDefault()">
+            <i class="fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
+                <span>% Discount</span>
+        </button>
+    </t>
+</templates>

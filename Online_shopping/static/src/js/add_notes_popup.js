@@ -22,14 +22,25 @@ export class AddNote extends Component {
     //     });
     //     console.log(order);
     // }
-// }
 
     async onButtonAddedNote(){
-        const { confirmed, payload: note } = await this.popup.add(TextAreaPopup, {
-            title: _t("Add Notes"),
+        // const { confirmed, payload: note } = await this.popup.add(TextAreaPopup, {
+        //     title: _t("Add Notes"),
+        // });
+        const selectedOrderline = this.pos.get_order().get_selected_orderline();
+        const order = this.pos.get_order();
+        if (!selectedOrderline) {
+            return;
+        }
+        const { confirmed, payload: inputNote } = await this.popup.add(TextAreaPopup, {
+            title: _t("Add Note"),
         });
+
         if (confirmed) {
-        }   
+            order.setCustomerNote(inputNote);
+            // selectedOrderline.set_customer_note(inputNote);
+            // selectedOrderline.setNote(inputNote);
+        }  
     }
 }
 

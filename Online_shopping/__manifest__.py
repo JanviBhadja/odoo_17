@@ -6,7 +6,7 @@
     'description': '',
     'sequence': 10,
     'category': 'E Commerce',
-    'depends': ['base', 'planning', 'purchase', 'hr_expense', 'sale_management', 'sale_stock', 'website_sale','portal', 'point_of_sale'],
+    'depends': ['base', 'point_of_sale', 'planning', 'purchase', 'hr_expense', 'sale_management', 'sale_stock', 'website_sale','portal'],
     'assets': {
         'web.assets_backend': [
             "Online_shopping/static/src/views/inherited_view.xml",
@@ -27,6 +27,8 @@
             'Online_shopping/static/src/js/quantity.js',
             'Online_shopping/static/src/js/add_notes_popup.js',
             'Online_shopping/static/src/js/discount_button.js',
+            'Online_shopping/static/src/views/discount_button.xml',
+            'Online_shopping/static/src/js/add_note.js',
         ],
     },
 
