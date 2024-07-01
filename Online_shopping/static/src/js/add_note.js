@@ -6,16 +6,22 @@ import { patch } from "@web/core/utils/patch";
 patch(Order.prototype, {
     export_as_JSON(){
         const result = super.export_as_JSON(...arguments);
-        result.note = this.getCustomerNote();
+        result.note = this.getNote();
         return result;
     },
 
-    getCustomerNote() {
+    getNote() {
         return this.note || "";
     },
 
-    setCustomerNote(note) {
+    setNote(note) {
         this.note = note;
+    },
+
+    export_for_printing() {
+        const result = super.export_for_printing(...arguments);
+        result.note = this.getNote();
+        return result;
     },
 
 });

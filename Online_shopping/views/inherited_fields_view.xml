@@ -139,6 +139,7 @@
                 <data>
                     <xpath expr="//field[@name='session_id']" position="after">
                        <field name="note" />
+                       <!-- <field name="discount" /> -->
                     </xpath>
                 </data>
             </field>
@@ -155,6 +156,24 @@
                     </group>
                 </xpath>
             </field>
+        </record>
+
+        <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.point_of_sale</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="95"/>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//app/div/block[@id='pos_pricing_section']" position="after">
+                    <block title="Discount" id="pos_discount_section">
+                        <div>
+                            <group>
+                                <field name="discount"/>
+                            </group>
+                        </div>
+                    </block>
+                </xpath>
+            </field>   
         </record>
     </data>
 </odoo>

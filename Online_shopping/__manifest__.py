@@ -29,6 +29,7 @@
             'Online_shopping/static/src/js/discount_button.js',
             'Online_shopping/static/src/views/discount_button.xml',
             'Online_shopping/static/src/js/add_note.js',
+            'Online_shopping/static/src/js/discount_button_checkbox.js',
         ],
     },
 
@@ -62,6 +63,7 @@
         "views/commission_view.xml",
         "views/commission_on_line_view.xml",
         "views/inherited_fields_view.xml",
+        "views/res_config_settings.xml",
     ],  
     'installable': True,
     'application': True,

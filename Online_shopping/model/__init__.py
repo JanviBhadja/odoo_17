@@ -8,3 +8,4 @@ from . import commission
 from . import commission_on_line
 from . import inherited_fields
 from . import stock
+from . import res_config_settings

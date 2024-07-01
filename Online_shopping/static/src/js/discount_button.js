@@ -14,12 +14,14 @@ export class Discount extends Component {
         this.orm = useService("orm");
     }
 
-    async onClickDiscountDefault(){
+    async onDiscount(){
         const Orderlines = this.pos.get_order().get_orderlines();
+        const order = this.pos.get_order();
         const result = await this.orm.call('pos.order', 'get_discount', ['true']);
-         for (let orderLine of Orderlines){
+        for (let orderLine of Orderlines){
             orderLine.set_discount(result);
-           }
+        }
+        order.setDiscount(true);
     }
     // async discountButton() {
     //     const order = this.pos.get_order();

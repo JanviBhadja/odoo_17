@@ -37,7 +37,7 @@ export class AddNote extends Component {
         });
 
         if (confirmed) {
-            order.setCustomerNote(inputNote);
+            order.setNote(inputNote);
             // selectedOrderline.set_customer_note(inputNote);
             // selectedOrderline.setNote(inputNote);
         }  

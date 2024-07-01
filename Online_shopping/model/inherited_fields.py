@@ -256,17 +256,19 @@ class PosOrder(models.Model):
     _inherit = 'pos.order'
 
     note = fields.Char(string="Added Note")
+    discount = fields.Boolean(string="Discount")
 
     @api.model
     def _order_fields(self, ui_order):
-        original_result = super(PosOrder, self)._order_fields(ui_order)
-        original_result['note'] = ui_order.get('note', "")
-        return original_result
+        result = super(PosOrder, self)._order_fields(ui_order)
+        result['note'] = ui_order.get('note', "")
+        result['discount'] = ui_order.get('discount')
+        return result
 
     def get_discount(self):
-        param_obj = self.env['ir.config_parameter'].sudo()
-        discount_limit = param_obj.get_param('discount')
-        return float(discount_limit)
+        param_conf = self.env['ir.config_parameter'].sudo()
+        discount = param_conf.get_param('discount')
+        return float(discount)
 
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
