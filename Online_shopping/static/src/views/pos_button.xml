@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
     <t t-name="point_of_sale.PosButton">
-        <button class="control-button" t-on-click="() => this.onRemoveAll()">
-            <i class="fa fa-superpowers" role="img" aria-label="POS Button" title="POS Button"/>
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onRemoveAll()">
+            <i class="" role="img" aria-label="POS Button" title="POS Button"/>
                 <span>POS Button</span>
         </button>
     </t>
 
     <t t-name="point_of_sale.AddNotes">
-        <button class="control-button" t-on-click="() => this.onButtonAddedNote()">
-            <i class="fa fa-superpowers" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onButtonAddedNote()">
+            <i class="" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
                 <span>Add Notes</span>
         </button>
     </t>
+
+    <t t-name="point_of_sale.Template">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onButtonTemplate()">
+            <i class="" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
+                <span>Template</span>
+        </button>
+    </t>
+
+    <t t-name="Online_shopping.ProductOrdersButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onButtonTemplate()">
+            <i class="" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
+                <span>Booked Order</span>
+        </button>
+    </t>
+    
 
     <t t-name="point_of_sale.quantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
         <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">

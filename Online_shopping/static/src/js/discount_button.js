@@ -17,6 +17,7 @@ export class Discount extends Component {
     async onDiscount(){
         const Orderlines = this.pos.get_order().get_orderlines();
         const order = this.pos.get_order();
+        console.log(order)
         const result = await this.orm.call('pos.order', 'get_discount', ['true']);
         for (let orderLine of Orderlines){
             orderLine.set_discount(result);

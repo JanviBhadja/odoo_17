@@ -106,6 +106,9 @@
                         </group>
                     </page>
                 </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="is_sundry_customer"/>
+                </xpath>
             </field>
         </record>
 
@@ -169,6 +172,7 @@
                         <div>
                             <group>
                                 <field name="discount"/>
+                                <field name="location_id" />
                             </group>
                         </div>
                     </block>

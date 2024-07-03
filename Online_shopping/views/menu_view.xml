@@ -41,7 +41,6 @@
                 name="Product Delivery" 
                 parent="root_menu"/>
 
-
         <!-- sale module custom menu -->
         <menuitem 
                 id="menu_sale_commission"
@@ -53,4 +52,9 @@
                 name="Excel Report"
                 parent="sale.menu_sale_report"
                 action="action_commission_sale_wizard_my"/>
+
+        <menuitem id="menu_config"
+            name="Configuration"
+            parent="root_menu"/>
+
 </odoo>

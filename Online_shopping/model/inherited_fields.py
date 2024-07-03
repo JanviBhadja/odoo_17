@@ -194,6 +194,7 @@ class ResPartner(models.Model):
     commission_amount_on = fields.Float(string='Commission Amount On')
     percentage = fields.Integer(string="Percentage")
     dob = fields.Date(string='Date of Birth')
+    is_sundry_customer = fields.Boolean(string='Sundry Customer')
 
     def action_send_email(self):
         self.ensure_one()
@@ -270,10 +271,21 @@ class PosOrder(models.Model):
         discount = param_conf.get_param('discount')
         return float(discount)
 
-class ResConfigSettings(models.TransientModel):
-    _inherit = 'res.config.settings'
+    def _get_partner_fields(self):
+        fields = super(PosOrder, self)._get_partner_fields()
+        fields.append('is_sundry_customer')
+        return fields
 
-    discount = fields.Integer(string="Dicount",
-    config_parameter = 'discount'
-    )
+    def get_location(self):
+        loc = self.env['pos.config'].search([])
+        results = []
+        for i in loc:
+            for r in i.location_id:
+                results.append(r.location)
+        # print(results)
+        return results
         
+class PosConfig(models.Model):
+    _inherit = 'pos.config'
+
+    location_id = fields.Many2many('res.location', string='Locations')
