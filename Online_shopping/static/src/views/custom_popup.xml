@@ -11,12 +11,13 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Location:</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="exampleFormControlSelect1" t-model="state.inputValue">
+                            <option>Select Locations</option>
                             <t t-foreach="props.locations" t-as="location" t-key="props.locations">
                                 <option t-esc="location"/>
                             </t>
                         </select>
-                      </div>
+                    </div>
                     <!-- <label for="location">Location:</label>
                     <select name="location" id="location">
                         <t t-foreach="props.locations" t-as="location" t-key="props.locations">
