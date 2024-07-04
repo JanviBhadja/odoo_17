@@ -14,7 +14,6 @@ class ProductOrdersScreen extends TicketScreen {
     }
     back() {
         this.pos.showScreen('ProductScreen');
-    }
-   
+    }  
 }
 registry.category("pos_screens").add("ProductOrdersScreen", ProductOrdersScreen);

@@ -252,18 +252,19 @@ class ResPartner(models.Model):
 
 #         return available_quantity
 
-
 class PosOrder(models.Model):
     _inherit = 'pos.order'
 
     note = fields.Char(string="Added Note")
     discount = fields.Boolean(string="Discount")
+    location = fields.Char(string="Location")
 
     @api.model
     def _order_fields(self, ui_order):
         result = super(PosOrder, self)._order_fields(ui_order)
         result['note'] = ui_order.get('note', "")
         result['discount'] = ui_order.get('discount')
+        result['location'] = ui_order.get('location_added',"")
         return result
 
     def get_discount(self):
@@ -284,6 +285,8 @@ class PosOrder(models.Model):
                 results.append(r.location)
         # print(results)
         return results
+
+    
         
 class PosConfig(models.Model):
     _inherit = 'pos.config'

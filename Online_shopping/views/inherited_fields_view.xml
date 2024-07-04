@@ -142,7 +142,8 @@
                 <data>
                     <xpath expr="//field[@name='session_id']" position="after">
                        <field name="note" />
-                       <!-- <field name="discount" /> -->
+                       <field name="location" />
+                       <field name="discount" />
                     </xpath>
                 </data>
             </field>

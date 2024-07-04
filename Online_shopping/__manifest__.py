@@ -38,6 +38,7 @@
             'Online_shopping/static/src/views/location_button.xml',
             'Online_shopping/static/src/js/custom_popup.js',
             'Online_shopping/static/src/views/custom_popup.xml',
+            'Online_shopping/static/src/js/location_added.js',
         ],
     },
 

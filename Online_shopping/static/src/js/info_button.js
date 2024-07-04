@@ -17,3 +17,17 @@ export const modelInfoView = {
 };
 
 registry.category("views").add("model_info", modelInfoView);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

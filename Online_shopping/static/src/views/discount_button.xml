@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-name="point_of_sale.Discount">
         <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onDiscount()">
-            <i class="fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
+            <i class="fa fa-solid fa-tag" role="img" aria-label="Discount Button" title="Disvcount Button"/>
                 <span>% Discount</span>
         </button>
     </t>
@@ -13,6 +13,12 @@
                 <div class="custom-note">
                     Note:
                     <t t-esc="props.data.note" /> 
+                </div>
+            </t>
+            <t t-if="props.data.location_added">
+                <div class="custom-note">
+                    Location:
+                    <t t-esc="props.data.location_add" /> 
                 </div>
             </t>
         </xpath>
