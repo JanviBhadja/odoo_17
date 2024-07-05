@@ -16,18 +16,24 @@
 
     <t t-name="point_of_sale.Template">
         <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onButtonTemplate()">
-            <i class="" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
+            <i class="" role="img" aria-label="Add Template Button" title="Add Template Button"/>
                 <span>Template</span>
         </button>
     </t>
 
-    <t t-name="Online_shopping.ProductOrdersButton">
-        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onButtonTemplate()">
-            <i class="" role="img" aria-label="Add Notes Button" title="Add Notes Button"/>
-                <span>Booked Order</span>
+    <t t-name="point_of_sale.ProductOrderButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onProductOrderButton()">
+            <i class="" role="img" aria-label="Add Product Button" title="Add Product Button"/>
+                <span>Product Order</span>
         </button>
     </t>
     
+    <t t-name="point_of_sale.ProductBookingButton">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.onProductBookingButton()">
+            <i class="" role="img" aria-label="Add Product Booking Button" title="Add Product Booking Button"/>
+                <span>Product Booking</span>
+        </button>
+    </t>
 
     <t t-name="point_of_sale.quantityAdded" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
         <xpath expr="//div[@t-if='props.total or props.tax']" position="inside">

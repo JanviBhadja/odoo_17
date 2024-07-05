@@ -285,8 +285,6 @@ class PosOrder(models.Model):
                 results.append(r.location)
         # print(results)
         return results
-
-    
         
 class PosConfig(models.Model):
     _inherit = 'pos.config'

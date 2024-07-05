@@ -5,8 +5,8 @@ import { TicketScreen } from "@point_of_sale/app/screens/ticket_screen/ticket_sc
 import { usePos } from "@point_of_sale/app/store/pos_hook";
 import { useService } from "@web/core/utils/hooks";
 
-class ProductOrdersScreen extends TicketScreen {
-    static template = "Online_shopping.ProductOrdersScreen";
+class ProductOrderScreen extends TicketScreen {
+    static template = "Online_shopping.ProductOrderScreen";
     setup() {
         super.setup();
         this.pos = usePos();
@@ -14,6 +14,7 @@ class ProductOrdersScreen extends TicketScreen {
     }
     back() {
         this.pos.showScreen('ProductScreen');
-    }  
+    }
 }
-registry.category("pos_screens").add("ProductOrdersScreen", ProductOrdersScreen);
+
+registry.category("pos_screens").add("ProductOrderScreen", ProductOrderScreen);

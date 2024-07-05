@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
 <!--This is used for creating a new screen for showing booked orders-->
-    <t t-name="Online_shopping.ProductOrdersScreen" owl="1">
+    <t t-name="Online_shopping.ProductOrderScreen" owl="1">
     <div class="partnerlist-screen screen">
         <div class="screen-content">
             <div class="top-content">
-                <!-- <div class="button back" t-on-click="back" t-if="!props.new_order">
+                <div class="button back" t-on-click="back" t-if="!props.new_order">
                     <i class="fa fa-angle-double-left"/>
                     Back
                 </div>
@@ -13,23 +13,32 @@
                 <i class="oi oi-chevron-right" role="img"
                    aria-label="New Order" title="New Order"/>
                     New Order
-                </div> -->
-            </div> 
+                </div>
+            </div>
             <table class="partner-list table table-striped w-100">
                 <thead>
                     <tr>
                         <th class="py-2">Order Ref.</th>
                         <th class="py-2">Customer</th>
-                        <!-- <th class="py-2">Contact No.</th> -->
+                        <th class="py-2">product</th>
                         <th class="py-2">Order Date</th>
-                        <!-- <th class="py-2">Pickup Date</th> -->
                         <th class="py-2">Delivery Date</th>
                         <th class="py-2">Address</th>
                         <th class="py-2">Total</th>
-                        <th class="py-2">Confirm</th>
                     </tr>
                 </thead>
-                <tbody class="partner-list-contents">
+                <tbody>
+                   <tr>
+                    <td> <t t-esc="1"/> </td>
+                    <td> <t t-esc="2"/> </td>
+                    <td> <t t-esc="3"/> </td>
+                    <td> <t t-esc="4"/> </td>
+                    <td> <t t-esc="5"/> </td>
+                    <td> <t t-esc="6"/> </td>
+                    <td> <t t-esc="7"/> </td>
+                    </tr>
+                </tbody>
+                <!-- <tbody class="partner-list-contents">
                     <t t-foreach="props.data"
                        t-as="order"
                        t-key="order.id">
@@ -39,7 +48,7 @@
                                      t-att-class="{ highlight: isHighlighted(order) }">
                                     <div t-if="env.isMobile">Order Ref.</div>
                                     <div>
-                                        <t t-esc="order.orderId"/>
+                                        <t t-esc="order.name"/>
                                     </div>
                                 </div>
                             </td>
@@ -48,11 +57,11 @@
                                      t-att-class="{ highlight: isHighlighted(order) }">
                                     <div t-if="env.isMobile">Customer</div>
                                     <div>
-                                        <t t-esc="order.customer_id"/>
+                                        <t t-esc="order.partner_name"/>
                                     </div>
                                 </div>
                             </td>
-                            <!-- <td>
+                            <td>
                                 <div class="col"
                                      t-att-class="{ highlight: isHighlighted(order) }">
                                     <div t-if="env.isMobile">Contact No.</div>
@@ -60,7 +69,7 @@
                                         <t t-esc="order.phone"/>
                                     </div>
                                 </div>
-                            </td> -->
+                            </td>
                             <td>
                                 <div class="col"
                                      t-att-class="{ highlight: isHighlighted(order) }">
@@ -130,8 +139,8 @@
                             <h1>No orders found</h1>
                         </div>
                     </t>
-                </tbody>
-            </table>
+                </tbody>-->
+            </table> 
         </div>
     </div>
 </t>

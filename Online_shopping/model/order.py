@@ -141,7 +141,9 @@ class Order(models.Model):
         action = self.env.ref('Online_shopping.action_report_product_order').with_context(report = True, order_lines = data).report_action(data)
         return action
 
-
+    def all_orders(self):
+        print(self)
+        
     # def confirm_order_with_email(self):
     #     self.action_confirm()
         
