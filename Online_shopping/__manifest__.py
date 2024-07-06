@@ -45,8 +45,8 @@
     },
 
     'data': [
-        "security/ir.model.access.csv",
         "security/shopping_groups.xml",
+        "security/ir.model.access.csv",
         
         "wizard/cancel_order_wizard_view.xml",
         "wizard/sale_report_wizard_view.xml",

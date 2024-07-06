@@ -11,3 +11,5 @@ class ResConfigSettings(models.TransientModel):
     )
     enable_shopping = fields.Boolean(string="Enable Orders",
                             help="Enable if you want to order from pos")
+
+    sale_limit = fields.Float(string='Sales Limit', config_parameter = 'sale_limit')

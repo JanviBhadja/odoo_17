@@ -13,3 +13,6 @@ access_commission_sale_wizard,commission.sale.wizard_access,model_commission_sal
 Online_shopping.access_my_product_stock,access_my_product_stock,Online_shopping.model_my_product_stock,base.group_user,1,1,1,1
 Online_shopping.access_send_sales_report,access_send_sales_report,Online_shopping.model_send_sales_report,base.group_user,1,1,1,1
 access_res_location,res.location_access,model_res_location,base.group_user,1,1,1,1
+
+
+access_res_user_manager,res_user,base.model_res_users,Online_shopping.shopping_groups_manager_access,1,1,1,1

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="shopping_groups_manager" model="res.groups">
-        <field name="name">Shopping Access</field>
-        <field name="category_id" ref="base.group_erp_manager"/>
+<record id="model_category_shopping" model="ir.module.category">
+        <field name="name">Shopping Category</field>
+        <field name="description">Shopping Groups</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="shopping_groups_manager_access" model="res.groups">
+        <field name="name">Manager Group</field>
+        <field name="category_id" ref="Online_shopping.model_category_shopping"/>
     </record>
 </odoo>

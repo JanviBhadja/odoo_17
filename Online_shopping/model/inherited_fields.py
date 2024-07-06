@@ -9,6 +9,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     extra_tags = fields.Char(string="extra_tags")
+    image = fields.Image(string="Image", related="product_id.image_1920")
 
     def _prepare_procurement_values(self, group_id=False):
         values = super(SaleOrderLine, self)._prepare_procurement_values(group_id)
@@ -21,7 +22,8 @@ class SaleOrderLine(models.Model):
 class writeAnotherDetail(models.Model):
     _inherit="stock.move"
 
-    extra_tags = fields.Char(string = "Extra field", help="enter the date when order was placed")
+    extra_tags = fields.Char(string = "Extra field")
+    image = fields.Image(string="Image", related="product_id.image_1920")
 
 
 class StockRule(models.Model):
@@ -138,6 +140,20 @@ class SaleOrder(models.Model):
             mail_template.send_mail(salesperson.id , email_values=email_values, force_send=True)
 
         return True
+
+    state = fields.Selection(selection_add=[('to_approve', "To Approve")])
+
+    def action_confirm(self):
+        # print(self)
+        for order in self:
+            sale_limit = float(self.env['ir.config_parameter'].sudo().get_param('sale_limit'))
+            if order.amount_total > sale_limit:
+                order.state = 'to_approve'
+            else:
+                super(SaleOrder, order).action_confirm()
+
+    def action_approve(self):
+        self.env['sale.order'].browse(self.id).state = 'sale'
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
@@ -256,8 +272,11 @@ class PosOrder(models.Model):
     _inherit = 'pos.order'
 
     note = fields.Char(string="Added Note")
+
     discount = fields.Boolean(string="Discount")
+
     location = fields.Char(string="Location")
+
 
     @api.model
     def _order_fields(self, ui_order):
@@ -290,3 +309,8 @@ class PosConfig(models.Model):
     _inherit = 'pos.config'
 
     location_id = fields.Many2many('res.location', string='Locations')
+
+class AccountMove(models.Model):
+    _inherit = 'account.move.line'
+
+    image = fields.Image(string="Image", related="product_id.image_1920")
