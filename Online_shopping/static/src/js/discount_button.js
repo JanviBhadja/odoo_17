@@ -1,7 +1,7 @@
 /** @odoo-module */
 
 import { useService } from "@web/core/utils/hooks";
-import { Component, useState } from "@odoo/owl";
+import { Component } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { usePos } from "@point_of_sale/app/store/pos_hook";
 import { ProductScreen } from "@point_of_sale/app/screens/product_screen/product_screen";

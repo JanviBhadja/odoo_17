@@ -12,9 +12,9 @@
                            <thead>
                                <tr>
                                     <th>Expense Date</th>
-                                   <th>description</th>
-                                   <th>Employee Id</th>
-                                   <th>Total</th>
+                                    <th>description</th>
+                                    <th>Employee Id</th>
+                                    <th>Total</th>
                                </tr>
                            </thead>
                            <tbody>

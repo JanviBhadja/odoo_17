@@ -77,6 +77,7 @@
         "views/res_config_settings.xml",
         "views/res_location.xml",
         "views/stock.xml",
+        "views/sale_order.xml",
     ],  
     'installable': True,
     'application': True,
