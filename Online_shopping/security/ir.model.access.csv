@@ -5,6 +5,7 @@ access_my_customer_customer,my.customer.customer_access,model_my_customer_custom
 access_product_order,product.order_access,model_product_order,base.group_user,1,1,1,1
 access_order_item,order.item_access,model_order_item,base.group_user,1,1,1,1
 access_product_delivery_me,product.delivery.me_access,model_product_delivery_me,base.group_user,1,1,1,1
+access_my_product_stock,my.product.stock_access,model_my_product_stock,base.group_user,1,1,1,1
 access_cancel_order_wizard,cancel.order.wizard_access,model_cancel_order_wizard,base.group_user,1,1,1,1
 access_sale_report_wizard,sale.report.wizard_access,model_sale_report_wizard,base.group_user,1,1,1,1
 access_commission,commission_access,model_commission,base.group_user,1,1,1,1

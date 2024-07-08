@@ -76,6 +76,7 @@
         "views/inherited_fields_view.xml",
         "views/res_config_settings.xml",
         "views/res_location.xml",
+        "views/stock.xml",
     ],  
     'installable': True,
     'application': True,

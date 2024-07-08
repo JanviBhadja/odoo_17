@@ -41,6 +41,11 @@
                 name="Product Delivery" 
                 parent="root_menu"/>
 
+        <menuitem 
+                id="stock_menu" 
+                name="Stock" 
+                parent="root_menu"/>
+
         <!-- sale module custom menu -->
         <menuitem 
                 id="menu_sale_commission"
