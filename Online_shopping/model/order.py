@@ -102,10 +102,9 @@ class Order(models.Model):
             existing_delivery = self.env['product.delivery.me'].search([('order_id', '=', order.id)], limit=1)
             # print('existing_delivery',existing_delivery)
             if existing_delivery:
-                # Update the existing delivery record
                 delivery_vals = {
-                    'delivery_date': fields.Date.today() + timedelta(days=3),  # Set your expected delivery date here
-                    'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , # Update payment status
+                    'delivery_date': fields.Date.today() + timedelta(days=3), 
+                    'payment': 'paid' if order.payment_status == 'paid' else 'unpaid' , 
                     'state' : 'ordered'
                 }
                 existing_delivery.write(delivery_vals)
