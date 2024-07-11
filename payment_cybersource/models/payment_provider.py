@@ -4,8 +4,9 @@ import base64
 import hashlib
 import hmac
 import json
-from datetime import datetime
 import requests
+from datetime import datetime
+import time
 from odoo import models, fields, api
 
 class PaymentProvider(models.Model):
@@ -20,6 +21,7 @@ class PaymentProvider(models.Model):
     cybersource_secret_key = fields.Char(
         string="Secret Key")
 
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
@@ -29,29 +31,28 @@ class SaleOrder(models.Model):
         request_host = "apitest.cybersource.com"
         merchant_id = "janvi2403_1720528302"
 
-        header_list = []
-        header_list.append("keyid=\"" + str(api_key_id) + "\"")
-        header_list.append(", algorithm=\"HmacSHA256\"")
+        header_list = [
+            f'keyid="{api_key_id}"',
+            'algorithm="HmacSHA256"',
+            'headers="host date request-target digest v-c-merchant-id"'
+        ]
 
-        postheaders = "host date request-target digest v-c-merchant-id"
-        header_list.append(", headers=\"" + postheaders + "\"")
+        signature_list = [
+            f'host: {request_host}',
+            f'date: {time}',
+            f'request-target: {method} {resource}',
+            f'digest: SHA-256={digest}',
+            f'v-c-merchant-id: {merchant_id}'
+        ]
 
-        signature_list = []
-        signature_list.append("host: " + request_host + "\n")
-        signature_list.append("date: " + time + "\n")
-        signature_list.append("request-target: " + method + " " + resource + "\n")
-        signature_list.append("digest: SHA-256=" + digest + "\n")
-        signature_list.append("v-c-merchant-id: " + merchant_id)
-
-        sig_value = "".join(signature_list)
-        sig_value_utf = bytes(sig_value, encoding='utf-8')
-
+        sig_value = "\n".join(signature_list)
+        sig_value_utf = sig_value.encode('utf-8')
         secret = base64.b64decode(secret_key)
         hash_value = hmac.new(secret, sig_value_utf, hashlib.sha256)
         signature = base64.b64encode(hash_value.digest()).decode("utf-8")
 
-        header_list.append(", signature=\"" + signature + "\"")
-        token = ''.join(header_list)
+        header_list.append(f'signature="{signature}"')
+        token = ", ".join(header_list)
 
         return token
 
@@ -69,47 +70,53 @@ class SaleOrder(models.Model):
             },
             "paymentInformation": {
                 "card": {
-                    "number": "4111111111111111",
-                    "expirationMonth": "12",
-                    "expirationYear": "2031"
+                "number": "4111111111111111",
+                "expirationMonth": "12",
+                "expirationYear": "2031"
                 }
             },
             "orderInformation": {
                 "amountDetails": {
-                    "totalAmount": "102.21",
-                    "currency": "USD"
+                "totalAmount": "102.21",
+                "currency": "USD"
                 },
                 "billTo": {
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "address1": "1 Market St",
-                    "locality": "san francisco",
-                    "administrativeArea": "CA",
-                    "postalCode": "94105",
-                    "country": "US",
-                    "email": "test@cybs.com",
-                    "phoneNumber": "4158880000"
+                "firstName": "John",
+                "lastName": "Doe",
+                "address1": "1 Market St",
+                "locality": "san francisco",
+                "administrativeArea": "CA",
+                "postalCode": "94105",
+                "country": "US",
+                "email": "test@cybs.com",
+                "phoneNumber": "4158880000"
                 }
             }
         }
 
         digest = self.get_digest(payload)
         method = "post"
-        resource = "https://apitest.cybersource.com/pts/v2/payments"
+        base_url = "https://apitest.cybersource.com/pts/v2/payments"
+        resource = "/pts/v2/payments"
         current_time = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT")
         signature = self.get_signature(method, resource, current_time, digest)
 
         headers = {
-            "v-c-merchant-id": "janvi2403_1720528302",
-            "date": current_time,
-            "host": "apitest.cybersource.com",
-            "digest": "SHA-256=" + digest,
-            "signature": signature,
-            "content-type": "application/json",
-            "Authorization": "Signature " + signature
+            'host': "apitest.cybersource.com",
+            'date': current_time,
+            'digest': f"SHA-256={digest}",
+            'v-c-merchant-id': "janvi2403_1720528302",
+            'signature': signature,
+            'Content-Type': 'application/json'
         }
 
-        response = requests.post(resource, json=payload, headers=headers)
+        print("Payload:", json.dumps(payload, indent=4))
+        print("Headers:", headers)
+
+        response = requests.post(base_url, json=payload, headers=headers)
+
+        print("Response Status:", response.status_code)
+        print("Response Body:", response.text)
 
         if response.status_code == 201:
             return response.json()

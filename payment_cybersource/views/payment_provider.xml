@@ -6,15 +6,13 @@
         <field name="model">payment.provider</field>
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
-        <xpath expr="//notebook" position="inside">
-            <page string="Credentials">
-                <group name="provider_credentials">
+            <group name="provider_credentials" position='inside'>
+                <group invisible="code != 'cybersource'">
                     <field name="cybersource_merchant_id_key" />
                     <field name="cybersource_api_key_id" />
                     <field name="cybersource_secret_key" />
                 </group>
-            </page>
-            </xpath>
+            </group>
         </field>
     </record>
 

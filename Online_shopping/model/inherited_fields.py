@@ -238,6 +238,22 @@ class ResPartner(models.Model):
             'context': ctx,
         }
 
+    @api.model
+    def _get_view(self, view_id=None, view_type='form', **options):
+        arch,res = super(ResPartner, self)._get_view(view_id, view_type, **options)
+        user1= self.env.user.has_group('Online_shopping.shopping_groups_manager_access')
+        form_nodes = arch.xpath("//form")
+        form_forms = arch.xpath("//field")
+        if view_type == 'form' and (user1):
+            print("asedrf")
+            for node in form_nodes:
+                node.set('create', 'false')
+                node.set('delete', 'false')
+            for form in form_forms:
+                form.set('readonly', '1')
+            # res['arch'] = etree.tostring(arch_tree, encoding='unicode')
+        return arch,res
+        
     # def bday_notification(self):
     #     # for rec in self:
     #     # print("ASDE")
@@ -316,3 +332,4 @@ class AccountMove(models.Model):
     _inherit = 'account.move.line'
 
     image = fields.Image(string="Image", related="product_id.image_1920")
+
