@@ -244,14 +244,23 @@ class ResPartner(models.Model):
         user1= self.env.user.has_group('Online_shopping.shopping_groups_manager_access')
         form_nodes = arch.xpath("//form")
         form_forms = arch.xpath("//field")
-        if view_type == 'form' and (user1):
+        list_forms = arch.xpath("//tree")
+        kanban_forms = arch.xpath("//tree")
+        if view_type == 'form' and (not user1):
             print("asedrf")
             for node in form_nodes:
                 node.set('create', 'false')
                 node.set('delete', 'false')
             for form in form_forms:
                 form.set('readonly', '1')
-            # res['arch'] = etree.tostring(arch_tree, encoding='unicode')
+        if view_type == 'tree' and (not user1):
+            for node in list_forms:
+                node.set('create','false')
+                node.set('delete','false')
+        if view_type == 'kanban' and (not user1):
+            for node in kanban_forms:
+                node.set('create','false')
+                node.set('delete','false')
         return arch,res
         
     # def bday_notification(self):
