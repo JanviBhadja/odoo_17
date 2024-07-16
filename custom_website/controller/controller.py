@@ -8,10 +8,10 @@ class myMain(http.Controller):
     @http.route('/myhome', type='http', auth='public', website=True)
     def hello(self,**kwargs):
         print(kwargs)
-        return request.render("custom_website.my_model_layout")
+        return request.render("custom_website.template_layout")
 
     @http.route('/myhome/submited', type='http', auth='public', website=True)
     def status(self,**kwargs):
         status = kwargs.get('status')
         if status == "success":
-            return request.render("custom_website.my_model_status")
+            return request.render("custom_website.template_status")

@@ -1,36 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="my_model_layout" name="sale order form">
+    <template id="template_layout" name="sale order form">
         <t t-call="website.layout">
             
             <div class="container col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="/custom_website/static/src/img/logo.jpeg" class="d-block mx-lg-auto img img-fluid" alt="BV Themes" width="700" height="500" loading="lazy"/>
+                    <div class="col-12 col-lg-4">
+                        <img src="/custom_website/static/src/img/1.jpg" class="d-block mx-lg-auto img img-fluid" alt="Themes" width="700" height="500" loading="lazy"/>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <img src="/custom_website/static/src/img/3.jpg" class="d-block mx-lg-auto img img-fluid" alt="Birds" width="700" height="500" loading="lazy"/>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <img src="/custom_website/static/src/img/4.jpg" class="d-block mx-lg-auto img img-fluid" alt="Nature" width="700" height="500" loading="lazy"/>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div>
-                    <div class="m-1 p-1 text-center">
-                        <h1>Form!</h1>
-                    </div>
-                </div>
-                <form class="my-3 mx-1" action="/myhome/submited?status=success" method="post">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary submitButton" >Submit</button>
-                </form>
-
-                <div class="m-1">
+            <div class="t-1">
                     <div>
                         <div class="m-1 p-1 text-center">
                             <h1>Table!</h1>
@@ -39,7 +26,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">No.</th>
                             <th scope="col">salesperson</th>
                             <th scope="col">customer</th>
                             <th scope="col">order</th>
@@ -66,10 +53,28 @@
                         </tbody>
                     </table>
                 </div>
+            <div class="container">
+                <div>
+                    <div class="m-1 p-1 text-center">
+                        <h1>Form!</h1>
+                    </div>
+                </div>
+                <form class="my-3 mx-1" action="/myhome/submited?status=success" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary submitButton" >Submit</button>
+                </form>
             </div>
         </t>
     </template>
-    <template id="my_model_status" name="sale order form">
+    <template id="template_status" name="sale order form">
         <t t-call="website.layout">
             <h1>Hello Good Morning</h1>
         </t>

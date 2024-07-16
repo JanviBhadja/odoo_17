@@ -18,7 +18,6 @@ patch(Order.prototype, {
 
     export_for_printing() {
         const result = super.export_for_printing(...arguments);
-        // result.location_add = this.location_added || "";
         result.location_add = this.location_added || "";
         return result;
     },

@@ -47,7 +47,7 @@ export class Location extends Component {
                         });
                     } else {
                         order1.setLocation(input);
-                        this.state.locationText = input || _t("Location");
+                        this.state.selectedLocation = input || _t("Location");
                         this.state.locationAdded = !!input;
                         break;
                     }
@@ -56,13 +56,16 @@ export class Location extends Component {
                 }
             } else {
                 await this.popup.add(ErrorPopup, {
-                    title: _t("Select Partner"),
-                    body: _t("Please select the Partner."),
+                    title: _t("Select Customer"),
+                    body: _t("Please select Customer."),
                     cancelKey: true,
                 });
                 break;
             }
         }
+    }
+    getLocation(){
+        return this.state.locationAdded;
     }
 }
 
