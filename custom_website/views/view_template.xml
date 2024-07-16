@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="template_layout" name="sale order form">
+    <template id="template_layout" name="custom page">
         <t t-call="website.layout">
             
             <div class="container col-xxl-8 px-4 py-5">
@@ -20,7 +20,7 @@
             <div class="t-1">
                     <div>
                         <div class="m-1 p-1 text-center">
-                            <h1>Table!</h1>
+                            <h1>Table</h1>
                         </div>
                     </div>
                     <table class="table">
@@ -56,27 +56,41 @@
             <div class="container">
                 <div>
                     <div class="m-1 p-1 text-center">
-                        <h1>Form!</h1>
+                        <h1>Form</h1>
                     </div>
                 </div>
-                <form class="my-3 mx-1" action="/myhome/submited?status=success" method="post">
+                <form id="sale_order_form" class="my-3 mx-1">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" id="partner_id" name="partner_id" value="1"/>
+                    <input type="hidden" id="user_id" name="user_id" value="2"/> 
+                    <input type="hidden" id="order_lines" name="order_lines" value='[{"product_id": 1, "product_uom_qty": 2, "price_unit": 50.0}]'/>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"/>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password"/>
+                        <input type="password" class="form-control" id="password" name="password"/>
                     </div>
-                    <button type="submit" class="btn btn-primary submitButton" >Submit</button>
+                    <button type="submit" class="btn btn-primary submitButton">Submit</button>
                 </form>
             </div>
         </t>
     </template>
     <template id="template_status" name="sale order form">
         <t t-call="website.layout">
-            <h1>Hello Good Morning</h1>
+            <t t-if="status == 'success'">
+                <h2>Sale Order Created Successfully</h2>
+                <p>Sale Order ID: <t t-esc="sale_order.id"/></p>
+                <p>Partner ID: <t t-esc="sale_order.partner_id.id"/></p>
+                <p>User ID: <t t-esc="sale_order.user_id.id"/></p>
+                <h3>Order Lines:</h3>
+                <ul>
+                    <t t-foreach="sale_order.order_line" t-as="line">
+                        <li>Product ID: <t t-esc="line.product_id.id"/> - Quantity: <t t-esc="line.product_uom_qty"/> - Price: <t t-esc="line.price_unit"/></li>
+                    </t>
+                </ul>
+            </t>
         </t>
     </template>
 </odoo>

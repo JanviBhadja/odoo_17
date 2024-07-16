@@ -9,7 +9,7 @@
     'depends': ['base','website','sale'],
     'assets': {
         'web.assets_frontend':[
-            "custom_website/static/src/js/submit_button.js",   
+            "custom_website/static/src/js/submit_button.js",
         ],
     },
 
