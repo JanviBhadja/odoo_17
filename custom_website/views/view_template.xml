@@ -74,21 +74,4 @@
             </div>
         </t>
     </template>
-    <template id="template_status" name="sale order form">
-        <t t-call="website.layout">
-            <h2>Sale Order Status</h2>
-            <t t-if="status == 'success'">
-                <p>Sale Order Created Successfully</p>
-                <p>Sale Order ID: <t t-esc="sale_order.id"/></p>
-                <p>Partner ID: <t t-esc="sale_order.partner_id.id"/></p>
-                <p>User ID: <t t-esc="sale_order.user_id.id"/></p>
-                <h3>Order Lines:</h3>
-                <ul>
-                    <t t-foreach="sale_order.order_line" t-as="line">
-                        <li>Product ID: <t t-esc="line.product_id.id"/> - Quantity: <t t-esc="line.product_uom_qty"/> - Price: <t t-esc="line.price_unit"/></li>
-                    </t>
-                </ul>
-            </t>
-        </t>
-    </template>
 </odoo>

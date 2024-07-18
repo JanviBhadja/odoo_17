@@ -34,27 +34,3 @@ class myMain(http.Controller):
                 'password' : kwargs.get('password'),
             })
             return request.redirect("/shopping/hello")
-
-
-    # @http.route('/myhome/create_sale_order', type='http', auth='public', website=True, method=['post'])
-    # def create_sale_order(self, **kwargs):
-    #     partner_id = kwargs.get('partner_id')
-    #     user_id = kwargs.get('user_id')
-    #     order_lines = http.json.loads(kwargs.get('order_lines', '[]'))
-
-    #     sale_order = request.env['sale.order'].sudo().create({
-    #         'partner_id': partner_id,
-    #         'partner_invoice_id': partner_id,
-    #         'partner_shipping_id': partner_id,
-    #         'user_id': user_id,
-    #         'order_line': [(0, 0, {
-    #             'product_id': line['product_id'],
-    #             'product_uom_qty': line['product_uom_qty'],
-    #             'price_unit': line['price_unit'],
-    #         }) for line in order_lines]
-    #     })
-
-    #     return request.render("custom_website.template_status", {
-    #         'status': 'success',
-    #         'sale_order': sale_order
-    #     })
