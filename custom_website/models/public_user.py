@@ -5,4 +5,3 @@ class PublicUser(models.Model):
 
     email = fields.Char(string="Email")
     password = fields.Char(string="Password")
-    

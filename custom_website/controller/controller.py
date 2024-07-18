@@ -10,32 +10,37 @@ class myMain(http.Controller):
         print(kwargs)
         return request.render("custom_website.template_layout")
 
+    @http.route('/shopping/hello', type='http', auth='public', website=True)
+    def sale_order(self, **kwargs):
+        customers = request.env['sale.order'].search([])
+        return request.redirect("custom_website.sale_order",{
+            'sale_data': customers
+        })
+
     @http.route('/myhome/user_data', type='http', auth='public', website=True, method=['post'])
     def data(self,**kwargs):
         data = kwargs.get('data')
-        if request.env.user.name == "Public User":
-            requst.env['public.user'].create({
+        print(request.env.user.name)
+        if request.env.user.name == "Public user":
+            request.env['public.user'].create({
                 'email' : kwargs.get('email'),
                 'password' : kwargs.get('password'),
             })
-            return request.render("custom_website.template_status")
+            return request.redirect("/myhome")
         else:
-            requst.env['sign.in.user'].create({
+            request.env['sign.in.user'].create({
                 'user_id' : request.env.uid,
                 'email' : kwargs.get('email'),
                 'password' : kwargs.get('password'),
             })
-            return request.render("custom_website.template_status")
+            return request.redirect("/shopping/hello")
 
 
     # @http.route('/myhome/create_sale_order', type='http', auth='public', website=True, method=['post'])
     # def create_sale_order(self, **kwargs):
     #     partner_id = kwargs.get('partner_id')
     #     user_id = kwargs.get('user_id')
-    #     order_lines = http.loads(kwargs.get('order_lines', '[]'))
-
-    #     if not partner_id or not user_id or not order_lines:
-    #         return request.render("custom_website.template_status", {'status': 'error', 'message': 'Missing required fields'})
+    #     order_lines = http.json.loads(kwargs.get('order_lines', '[]'))
 
     #     sale_order = request.env['sale.order'].sudo().create({
     #         'partner_id': partner_id,
