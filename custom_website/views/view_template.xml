@@ -3,7 +3,6 @@
 
     <template id="template_layout" name="custom page">
         <t t-call="website.layout">
-            
             <div class="container col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-12 col-lg-4">
@@ -18,21 +17,21 @@
                 </div>
             </div>
             <div class="t-1">
-                    <div>
-                        <div class="m-1 p-1 text-center">
-                            <h1>Table</h1>
-                        </div>
+                <div>
+                    <div class="m-1 p-1 text-center">
+                        <h1>Table</h1>
                     </div>
-                    <table class="table">
-                        <thead>
+                </div>
+                <table class="table">
+                    <thead>
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">salesperson</th>
                             <th scope="col">customer</th>
                             <th scope="col">order</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr>
                             <th scope="row">1</th>
                             <td></td>
@@ -50,9 +49,9 @@
                             <td ></td>
                             <td></td>
                         </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
+            </div>
             <div class="container">
                 <div>
                     <div class="m-1 p-1 text-center">
@@ -72,6 +71,31 @@
                     <button type="submit" class="btn btn-primary submitButton">Submit</button>
                 </form>
             </div>
+            <form action="/sale_order_search" method="get">
+                <!-- <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Sale Order Records
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Search Sale Order</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <label name = "order_name" class="form-label">Sale Orders</label>
+                                <input type="text" class="form-control" name="sale_order" id="orderSearchInput" placeholder="Search sale orders"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </t>
     </template>
+
 </odoo>

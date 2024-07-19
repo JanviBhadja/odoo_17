@@ -18,6 +18,7 @@
 
         'views/website_menu.xml',
         'views/view_template.xml',
+        'views/sale_order_template.xml',
     ],
 
 }
