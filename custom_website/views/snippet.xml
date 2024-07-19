@@ -1,0 +1,50 @@
+<odoo>
+    <template id="custom_snippet" name="custom snippet">
+        <section class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Joomla!</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Joomla!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Benefits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Joomla 3.9</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contribute</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Press Enquiries</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container text-center">
+                    <h1 class="display-4 ">The Flexible Platform</h1>
+                    <p class="lead ">Empowering Website Creators</p>
+                    <hr class="my-4"/>
+                    <p>Joomla! is an award-winning content management system (CMS), which enables you to build web sites and powerful online applications.</p>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="custom_website.custom_snippet"/>
+        </xpath>
+    </template>
+</odoo>
