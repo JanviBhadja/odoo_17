@@ -1,6 +1,6 @@
 {
     'name': 'Online Shopping',
-    'version': '1.1',
+    'version': '17.0.0.1',
     'author': 'Janvi Bhadja',
     'summary': 'E Commerce Online shopping system',
     'description': '',

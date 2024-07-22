@@ -3,7 +3,7 @@ from odoo.http import request
 import json
 
 class saleOrderController(http.Controller):
-    @http.route('/sale_order_search', type='http', auth="public", website=True, csrf=False, method=['get'])
+    @http.route('/sale_order_search', type='http', auth="public", website=True, csrf=False, methods=['get'])
     def sale_order_search(self, **post):
         sale_orders = post.get('sale_order')
         print(sale_orders)

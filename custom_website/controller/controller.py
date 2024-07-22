@@ -17,7 +17,7 @@ class myMain(http.Controller):
             'sale_data': customers
         })
 
-    @http.route('/myhome/user_data', type='http', auth='public', website=True, method=['post'])
+    @http.route('/myhome/user_data', type='http', auth='public', website=True, methods=['post'])
     def data(self,**kwargs):
         data = kwargs.get('data')
         print(request.env.user.name)

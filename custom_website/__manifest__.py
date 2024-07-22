@@ -4,7 +4,7 @@
     'authors': 'Jani Bhadja',
     'summary': 'Custom Website',
     'description': 'Custom Website',
-    'sequence': -1,
+    'sequence': 10,
     'category': 'website',
     'depends': ['base','website','sale'],
     'assets': {
@@ -20,6 +20,11 @@
         'views/view_template.xml',
         'views/sale_order_template.xml',
         'views/snippet.xml',
+        'views/sale_order_form_snippet.xml',
     ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
 
 }
