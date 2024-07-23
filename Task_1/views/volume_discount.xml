@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <record id="volume_discount_view_form" model="ir.ui.view">
+            <field name="name">volume.discount.view.form</field>
+            <field name="model">volume.discount</field>
+            <field name="arch" type="xml">
+                <form string="Discount Form">
+                    <sheet>
+                        <group>
+                            <field name="product_id" />
+                            <field name="customer_id" />
+                            <field name="min_quantity" />
+                            <field name="max_quantity" />
+                            <field name="discount_percentage" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="volume_discount_view_tree" model="ir.ui.view">
+            <field name="name">volume.discount.view.tree</field>
+            <field name="model">volume.discount</field>
+            <field name="arch" type="xml">
+                <tree string="Discount Tree">
+                    <field name="product_id" />
+                    <field name="customer_id" />
+                    <field name="min_quantity" />
+                    <field name="max_quantity" />
+                    <field name="discount_percentage" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="volume_discount_action" model="ir.actions.act_window">
+            <field name="name">Volume Discount</field>
+            <field name="res_model">volume.discount</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="volume_discount_submenu"
+            name="Volume Discount"
+            action="volume_discount_action"
+            parent="volume_discount_menu"/>
+
+    </data>
+</odoo>

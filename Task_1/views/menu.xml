@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem
+        id="root_menu"
+        name="Sale Order Discount"
+        sequence="10"/>
+
+    <menuitem
+        id="volume_discount_menu"
+        name="Volume Discount"
+        parent="root_menu"/>
+</odoo>
