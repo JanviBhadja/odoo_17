@@ -35,6 +35,12 @@
                 name="Customer" 
                 parent="root_menu"/>
 
+        <!-- Many2one -->
+        <menuitem 
+                id="menu_module_folder" 
+                name="Model" 
+                parent="root_menu"/>
+
         <!-- product delivery menu -->
         <menuitem 
                 id="menu_product_delivery_folder" 

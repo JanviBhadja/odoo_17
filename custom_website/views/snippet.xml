@@ -42,6 +42,7 @@
             </div>
         </section>
     </template>
+    
     <template id="external_snippets" inherit_id="website.snippets" priority="8">
         <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
             <t t-snippet="custom_website.custom_snippet"/>

@@ -4,7 +4,7 @@ import json
 
 class SaleOrderController(http.Controller):
 
-    @http.route('/create_sale_order', type='json', auth='public', methods=['POST'], csrf=False)
+    @http.route('/create_sale_order', type='json', auth='public', method=['POST'], csrf=False)
     def create_sale_order(self, **kwargs):
         order_data = json.loads(request.httprequest.data)
         print("order_data>>>>>>>>>>>", order_data)
@@ -28,7 +28,7 @@ class SaleOrderController(http.Controller):
 
         return {'status': 'success', 'sale_order_id': sale_order.id}
 
-    @http.route('/website/form/mail.mail', type='json', auth='public', methods=['POST'], website=True)
+    @http.route('/website/form/mail.mail', type='json', auth='public', method=['POST'], website=True)
     def create_email(self, **kwargs):
         values = json.loads(request.httprequest.data)
         val = values.get('data_value')

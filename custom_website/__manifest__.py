@@ -10,6 +10,7 @@
     'assets': {
         'web.assets_frontend':[
             "custom_website/static/src/js/submit_button.js",
+            "custom_website/static/src/js/sale_order_form_snippet.js",
         ],
     },
 
@@ -21,6 +22,7 @@
         'views/sale_order_template.xml',
         'views/snippet.xml',
         'views/sale_order_form_snippet.xml',
+        'views/snippet2.xml',
     ],
     'installable': True,
     'application': True,

@@ -9,12 +9,12 @@ publicWidget.registry.SubmitButton = publicWidget.Widget.extend({
     },
 
     start: function () {
-        // console.log("SubmitButton");
+        console.log("SubmitButton");
         return this._super.apply(this, arguments);
     },
 
     _onChangeButton: function (ev) {
-        // console.log("Button clicked");
+        console.log("Button clicked");
         var button = ev.currentTarget;
 
         var email = document.querySelector('#email');  
@@ -41,7 +41,7 @@ publicWidget.registry.SubmitButton = publicWidget.Widget.extend({
             button.textContent = "Janvi";
             button.style.color = "yellow";
             button.style.backgroundColor = "green";
-            // console.log("Hello Good Morning");
+            console.log("Hello Good Morning");
         }
     },
 });

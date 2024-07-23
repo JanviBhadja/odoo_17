@@ -78,6 +78,7 @@
         "views/res_location.xml",
         "views/stock.xml",
         "views/sale_order.xml",
+        "views/selected_many2one_fields.xml",
     ],  
     'installable': True,
     'application': True,

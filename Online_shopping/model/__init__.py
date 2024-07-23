@@ -10,3 +10,4 @@ from . import inherited_fields
 from . import stock
 from . import res_config_settings
 from . import res_location
+from . import selected_many2one_fields

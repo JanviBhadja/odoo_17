@@ -1,15 +1,32 @@
 <odoo>
-    <template id="sale_order_form_snippet" name="custom form snippet">
-        <section class="sale-order-form-snippet">
-            <select class="form-select sale-order-form-snippet form-select-sm" aria-label="Small select example">
-                <option>Open this select menu</option>
-            </select>
+    <template id="sale_order_table_page" name="Sale Order Table">
+        <section class="container">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th scope="col">Order Number</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">SalesPerson</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="orders" t-as="order">
+                        <tr>
+                            <td><t t-esc="order.name"/></td>
+                            <td><t t-esc="order.partner_id.name"/></td>
+                            <td><t t-esc="order.user_id.name"/></td>
+                            <td><t t-esc="order.amount_total"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
         </section>
     </template>
 
     <template id="external_form_snippets" inherit_id="website.snippets" priority="9">
         <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
-            <t t-snippet="custom_website.sale_order_form_snippet"/>
+            <t t-snippet="custom_website.sale_order_table_page"/>
         </xpath>
     </template>
-</odoo>
+</odoo> 

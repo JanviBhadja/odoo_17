@@ -1,0 +1,14 @@
+<odoo>
+    <template id="sale_order_form_snippet_my" name="custom form snippet">
+        <section class="sale-order-form-snippet">
+            <select class="form-select sale-order-form-snippet form-select-lg mb-3" aria-label="Large select example"></select>
+            <div class="sale_order_data"></div>
+        </section>
+    </template>
+
+    <template id="external_form_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="custom_website.sale_order_form_snippet_my"/>
+        </xpath>
+    </template>
+</odoo>
