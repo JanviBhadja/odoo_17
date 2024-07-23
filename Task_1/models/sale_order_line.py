@@ -11,6 +11,7 @@ class SaleOrderLine(models.Model):
     def _compute_discount(self):
         for line in self:
             discounts = self.env['volume.discount'].get_active_discounts(line.product_id.id, line.product_uom_qty, line.order_id.partner_id.id)
+            print(discounts)
             if discounts:
                 line.discount_percentage = discounts[0].discount_percentage
                 line.volume_discount_applied = True
@@ -19,3 +20,8 @@ class SaleOrderLine(models.Model):
                 line.discount_percentage = 0.0
                 line.volume_discount_applied = False
                 line.discount_amount = 0.0
+
+    @api.depends('discount_amount')
+    def _compute_total_discount(self):
+        for order in self.mapped('order_id'):
+            order.total_discount = sum(order.order_line.mapped('discount_amount'))

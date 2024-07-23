@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
         <record id="volume_discount_view_form" model="ir.ui.view">
@@ -36,17 +37,17 @@
             </field>
         </record>
 
-        <record id="volume_discount_action" model="ir.actions.act_window">
+        <record id="product_volume_discount_action" model="ir.actions.act_window">
             <field name="name">Volume Discount</field>
             <field name="res_model">volume.discount</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <menuitem
-            id="volume_discount_submenu"
+            id="product_volume_discount_submenu"
             name="Volume Discount"
-            action="volume_discount_action"
-            parent="volume_discount_menu"/>
+            action="product_volume_discount_action"
+            parent="product_volume_discount_menu"/>
 
     </data>
 </odoo>

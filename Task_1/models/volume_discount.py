@@ -21,6 +21,13 @@ class VolumeDiscount(models.Model):
             ('start_date', '<=', today),
             '|', ('end_date', '>=', today), ('end_date', '=', False),
         ]
+        print('domain',domain)
+        # if customer_id:
+        #     print('customer_id',customer_id)
+        #     domain.append(('customer_id', '=', customer_id))
         if customer_id:
+            print('customer_id',customer_id)
             domain.append(('customer_id', '=', customer_id))
+        else:
+            domain.append(('customer_id', '=', self.partner_id))
         return self.search(domain)
