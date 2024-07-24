@@ -8,4 +8,9 @@
         id="product_volume_discount_menu"
         name="Volume Discount"
         parent="root_menu"/>
+
+    <menuitem
+        id="discount_history_tracking_menu"
+        name="Discount History"
+        parent="root_menu"/>
 </odoo>

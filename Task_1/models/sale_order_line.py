@@ -20,8 +20,3 @@ class SaleOrderLine(models.Model):
                 line.discount_percentage = 0.0
                 line.volume_discount_applied = False
                 line.discount_amount = 0.0
-
-    @api.depends('discount_amount')
-    def _compute_total_discount(self):
-        for order in self.mapped('order_id'):
-            order.total_discount = sum(order.order_line.mapped('discount_amount'))

@@ -12,6 +12,8 @@
         'views/menu.xml',
         'views/volume_discount.xml',
         'views/sale_order_line.xml',
+        'views/discount_history_tracking.xml',
+        'views/sale_order_view.xml',
     ],
     'installable': True,
     'application': True,
